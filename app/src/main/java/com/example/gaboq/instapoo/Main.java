@@ -31,7 +31,6 @@ public class Main extends AppCompatActivity {
         }
 
     };
-    //vamos a mamar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
