@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">InstaPOO</string>
+    <string name="title_home">Galería</string>
+    <string name="camara">Cámara</string>
+    <string name="configuraciones">Ajustes</string>
+
+</resources>
