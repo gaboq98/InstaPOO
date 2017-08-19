@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.gaboq.instapoo.Main">
+    tools:context="com.example.gaboq.instapoo.MainActivity">
 
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
+    </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -19,10 +24,4 @@
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="294dp"
-        android:layout_height="220dp"
-        android:text="Main" />
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
