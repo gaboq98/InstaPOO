@@ -13,30 +13,26 @@ public class Imagen {
         byte g;
         byte b;
 
-        protected void setRGB(byte r, byte g, byte b){
+        public void setRGB(byte r, byte g, byte b){
             this.r = r;
             this.g = g;
             this.b = b;
         }
 
-        public byte getR() {
-            return r;
-        }
+        public byte getR() {return r;}
 
-        public byte getG() {
-            return g;
-        }
+        public byte getG() {return g;}
 
-        public byte getB() {
-            return b;
+        public byte getB() {return b;}
+
+        public int getValue( byte r, byte g, byte b){ 
+            return (r & 0xff) << 16 | (g & 0xff) << 16 | (b & 0xff); 
         }
 
         Pixel(int color){
             this.r = (byte) ((color >> 16) & 0xff);
             this.g = (byte) ((color >>  8) & 0xff);
             this.b = (byte) (color & 0xff);
-
-
         }
     }
 
@@ -59,5 +55,33 @@ public class Imagen {
         for(int i =0; i < this.length; i++ ){
             pixels[i] = new Pixel(aux[i]);
         }
+    }
+    
+    
+    /*
+        //function to Filter Class //
+    public Bitmap generateBitmap(int[] aux, int width, int height){
+        return Bitmap.createBitmap(aux,width,height,RGB_565);
+    }
+    */
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public Pixel[] getPixels() {
+        return pixels;
+    }
+
+    public int[] getAux() {
+        return aux;
+    }
+
+    public long getLength() {
+        return length;
     }
 }
