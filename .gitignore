@@ -7,3 +7,7 @@
 /build
 /captures
 .externalNativeBuild
+.idea/modules.xml
+.idea/modules.xml
+app/src/main/java/com/example/gaboq/instapoo/filters/IFilter.java
+app/src/main/java/com/example/gaboq/instapoo/filters/IFilter.java
