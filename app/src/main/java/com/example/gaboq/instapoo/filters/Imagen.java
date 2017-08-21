@@ -19,7 +19,7 @@ public class Imagen implements IFilter{
 
     Imagen(){}
 
-    Imagen(Bitmap bitmap){
+    public Imagen(Bitmap bitmap){
         this.width = bitmap.getWidth();
         this.height = bitmap.getHeight();
         this.aux = new int[this.height*this.width];

@@ -8,7 +8,6 @@ import android.graphics.Canvas;
  */
 
 public interface IFilter {
-    //hola jeje
     public Bitmap generateBitmap();
     public void applyFilter();
     public Bitmap generatePreview(Bitmap bitmap, Canvas canvas);
