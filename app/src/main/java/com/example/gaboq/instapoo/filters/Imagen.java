@@ -23,6 +23,7 @@ public class Imagen implements IFilter{
         this.width = bitmap.getWidth();
         this.height = bitmap.getHeight();
         this.aux = new int[this.height*this.width];
+        this.pixels = new Pixel[this.height*this.width];
         bitmap.getPixels(aux, 0, this.width, 0, 0, this.width, this.height);
         this.length = this.height*this.width;
         fillpixels();
@@ -73,8 +74,8 @@ public class Imagen implements IFilter{
 
         public byte getB() {return b;}
 
-        public int getValue( byte r, byte g, byte b){
-            return (r & 0xff) << 16 | (g & 0xff) << 16 | (b & 0xff);
+        public int getValue(){
+            return (this.r & 0xff) << 16 | (this.g & 0xff) << 16 | (this.b & 0xff);
         }
 
         Pixel(int color){
