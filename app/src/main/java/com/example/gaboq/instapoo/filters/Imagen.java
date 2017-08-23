@@ -2,6 +2,8 @@ package com.example.gaboq.instapoo.filters;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
 
 /**
  * Created by jd_cm on 18/8/2017.
@@ -75,16 +77,16 @@ public class Imagen implements IFilter{
 
         public int getB() {return b;}
 
-
+        @ColorInt
         public int getValue(){
-            return ((a << 24) | 0xFF) + ((r << 16) | 0xFF) + ((g << 8) | 0xFF) + (b | 0xFF);
+            return Color.argb(a,r,g,b);
         }
 
         Pixel(int color){
-            this.a =  ((color >> 24) & 0xff);
-            this.r =  ((color >> 16) & 0xff);
-            this.g =  ((color >>  8) & 0xff);
-            this.b =  ((color      ) & 0xff);
+            this.a = Color.alpha(color);
+            this.r = Color.red(color);
+            this.g = Color.green(color);
+            this.b = Color.blue(color);
         }
     }
 

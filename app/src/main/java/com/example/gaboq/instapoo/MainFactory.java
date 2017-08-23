@@ -6,8 +6,10 @@ import com.example.gaboq.instapoo.filters.Averaging;
 import com.example.gaboq.instapoo.filters.DecompositionMax;
 import com.example.gaboq.instapoo.filters.DecompositionMin;
 import com.example.gaboq.instapoo.filters.Desaturation;
+import com.example.gaboq.instapoo.filters.GaussianBlur;
 import com.example.gaboq.instapoo.filters.IFilter;
 import com.example.gaboq.instapoo.filters.Imagen;
+import com.example.gaboq.instapoo.filters.Sepia;
 
 /**
  * Created by Admin on 20/8/2017.
@@ -25,6 +27,8 @@ public class MainFactory {
                 return new DecompositionMin(bitmap);
             case 4:
                 return new DecompositionMax(bitmap);
+            case 5:
+                return new Sepia(bitmap);
             default:
                 return new Imagen(bitmap);
         }
