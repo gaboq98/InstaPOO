@@ -67,7 +67,7 @@ public class MainFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            Toast.makeText(context, "Home Fragment", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Home", Toast.LENGTH_SHORT).show();
         }
     }
 
