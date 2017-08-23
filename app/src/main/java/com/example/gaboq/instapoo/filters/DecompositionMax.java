@@ -9,12 +9,7 @@ import android.graphics.Bitmap;
 public class DecompositionMax extends Imagen {
 
     public DecompositionMax(Bitmap bitmap){
-        this.width = bitmap.getWidth();
-        this.height = bitmap.getHeight();
-        this.aux = new int[this.height*this.width];
-        bitmap.getPixels(aux, 0, this.width, 0, 0, this.width, this.height);
-        this.length = this.height*this.width;
-        fillpixels();
+        Imagen(bitmap);
     }
 
 
@@ -27,6 +22,7 @@ public class DecompositionMax extends Imagen {
             b = pixels[i].getB();
             int maxValue = max(r,g,b);
             pixels[i].setRGB(maxValue,maxValue,maxValue);
+            aux[i] = pixels[i].getValue();
         }
     }
 }

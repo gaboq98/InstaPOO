@@ -9,12 +9,7 @@ import android.graphics.Bitmap;
 public class DecompositionMin extends Imagen {
 
     public DecompositionMin(Bitmap bitmap){
-        this.width = bitmap.getWidth();
-        this.height = bitmap.getHeight();
-        this.aux = new int[this.height*this.width];
-        bitmap.getPixels(aux, 0, this.width, 0, 0, this.width, this.height);
-        this.length = this.height*this.width;
-        fillpixels();
+        Imagen(bitmap);
     }
 
     @Override
@@ -26,6 +21,7 @@ public class DecompositionMin extends Imagen {
             b = pixels[i].getB();
             int minValue = min(r,g,b);
             pixels[i].setRGB(minValue,minValue,minValue);
+            aux[i] = pixels[i].getValue();
         }
     }
 

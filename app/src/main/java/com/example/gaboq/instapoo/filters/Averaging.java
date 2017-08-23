@@ -10,13 +10,7 @@ import android.graphics.Bitmap;
 public class Averaging extends Imagen {
 
     public Averaging(Bitmap bitmap){
-        this.width = bitmap.getWidth();
-        this.height = bitmap.getHeight();
-        this.aux = new int[this.height*this.width];
-        bitmap.getPixels(aux, 0, this.width, 0, 0, this.width, this.height);
-        this.length = this.height*this.width;
-        fillpixels();
-        applyFilter();
+        Imagen(bitmap);
     }
 
     @Override
@@ -28,6 +22,7 @@ public class Averaging extends Imagen {
             b = pixels[i].getB();
             int average = (r+g+b)/3;
             pixels[i].setRGB(average,average,average);
+            aux[i] = pixels[i].getValue();
         }
     }
 
