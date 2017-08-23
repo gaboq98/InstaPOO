@@ -28,6 +28,7 @@ public class DecompositionMax extends Imagen {
             b = pixels[i].getB();
             int maxValue = max(r,g,b);
             pixels[i].setRGB(maxValue,maxValue,maxValue);
+            aux[i] = pixels[i].getValue();
         }
     }
 }

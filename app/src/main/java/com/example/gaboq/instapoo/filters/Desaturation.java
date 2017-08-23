@@ -13,9 +13,9 @@ public class Desaturation extends Imagen {
         this.width = bitmap.getWidth();
         this.height = bitmap.getHeight();
         this.aux = new int[this.height*this.width];
+        this.pixels = new Pixel[this.height*this.width];
         bitmap.getPixels(aux, 0, this.width, 0, 0, this.width, this.height);
         this.length = this.height*this.width;
-        this.pixels = new Pixel[this.height*this.width];
         fillpixels();
     }
 
@@ -29,6 +29,7 @@ public class Desaturation extends Imagen {
             int desaturate = ( max(r,g,b)+ min(r,g,b) )/2;
             desaturate = (byte) desaturate;
             pixels[i].setRGB(desaturate,desaturate,desaturate);
+            aux[i] = pixels[i].getValue();
         }
     }
 

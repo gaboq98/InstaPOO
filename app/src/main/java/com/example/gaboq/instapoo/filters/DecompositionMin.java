@@ -27,6 +27,7 @@ public class DecompositionMin extends Imagen {
             b = pixels[i].getB();
             int minValue = min(r,g,b);
             pixels[i].setRGB(minValue,minValue,minValue);
+            aux[i] = pixels[i].getValue();
         }
     }
 

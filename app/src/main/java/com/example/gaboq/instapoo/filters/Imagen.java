@@ -23,9 +23,9 @@ public class Imagen implements IFilter{
         this.width = bitmap.getWidth();
         this.height = bitmap.getHeight();
         this.aux = new int[this.height*this.width];
+        this.pixels = new Pixel[this.height*this.width];
         bitmap.getPixels(aux, 0, this.width, 0, 0, this.width, this.height);
         this.length = this.height*this.width;
-        this.pixels = new Pixel[this.height*this.width];
         fillpixels();
     }
 
@@ -37,7 +37,7 @@ public class Imagen implements IFilter{
 
     @Override
     public Bitmap generateBitmap() {
-        return Bitmap.createBitmap(aux,width,height, Bitmap.Config.RGB_565);
+        return Bitmap.createBitmap(this.aux,width,height, Bitmap.Config.RGB_565);
     }
 
     @Override
