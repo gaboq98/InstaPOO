@@ -37,7 +37,7 @@ public class Imagen implements IFilter{
 
     @Override
     public Bitmap generateBitmap() {
-        return Bitmap.createBitmap(aux,width,height, Bitmap.Config.RGB_565);
+        return Bitmap.createBitmap(this.aux,width,height, Bitmap.Config.RGB_565);
     }
 
     @Override

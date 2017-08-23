@@ -44,6 +44,7 @@ public class CamActivity extends AppCompatActivity {
             Bitmap bitmap = (Bitmap) extras.get("data");
             MainFactory mFactory = new MainFactory();
             IFilter f = mFactory.getFilter(bitmap, 1);
+            f.applyFilter();
             bitmap = f.generateBitmap();
             mPhotoCapture.setImageBitmap(bitmap);
 
