@@ -2,7 +2,9 @@ package com.example.gaboq.Cam;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -35,6 +37,7 @@ public class CamActivity extends AppCompatActivity {
         callCamera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(callCamera, START_CAMERA_APP);
     }
+
 
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
 
