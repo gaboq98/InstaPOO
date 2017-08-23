@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 
+import com.example.gaboq.instapoo.MainFactory;
 import com.example.gaboq.instapoo.R;
+import com.example.gaboq.instapoo.filters.IFilter;
 
 public class CamActivity extends AppCompatActivity {
 
@@ -40,6 +42,9 @@ public class CamActivity extends AppCompatActivity {
 
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
+            MainFactory mFactory = new MainFactory();
+            IFilter f = mFactory.getFilter(bitmap, 1);
+            bitmap = f.generateBitmap();
             mPhotoCapture.setImageBitmap(bitmap);
 
 
