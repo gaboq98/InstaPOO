@@ -10,7 +10,7 @@ import com.example.gaboq.instapoo.filters.IFilter;
 import com.example.gaboq.instapoo.filters.Imagen;
 
 /**
- * Created by Admin on 20/8/2017.
+ * Created by josu on 20/8/2017.
  */
 
 public class MainFactory {
