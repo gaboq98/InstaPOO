@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.example.gaboq.Cam.CamActivity;
 
+import layout.GalleryFragment;
 import layout.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,9 +31,10 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.navigation_gallery:
-                    Intent gallery = new Intent(MainActivity.this, GalleryTMPActivity.class );
-                    startActivity(gallery);
-                    //transaction.replace(R.id.content, new GalleryFragment()).commit();
+                    //Intent gallery = new Intent(MainActivity.this, GalleryTMPActivity.class );
+                    //startActivity(gallery);
+                    transaction.replace(R.id.content, new GalleryFragment()).commit();
+                    //setContentView(R.layout.fragment_gallery);
                     return true;
 
                 case R.id.navigation_cam:
