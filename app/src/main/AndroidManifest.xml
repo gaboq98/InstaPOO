@@ -22,7 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.gaboq.Cam.CamActivity" />
-        <activity android:name=".GalleryTMPActivity"></activity>
     </application>
 
 </manifest>

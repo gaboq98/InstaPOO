@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gaboq.instapoo.GalleryTMPActivity">
+    tools:context="layout.GalleryFragment">
 
 
     <GridView
         android:id="@+id/gridView"
         android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:visibility="visible"
         android:columnWidth="170dp"
         android:stretchMode="spacingWidthUniform"
+        android:verticalSpacing="5dp"
         android:horizontalSpacing="5dp"
         android:numColumns="auto_fit"
         />
