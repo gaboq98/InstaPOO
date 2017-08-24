@@ -16,7 +16,7 @@ public class FilterViewActivity extends AppCompatActivity {
     ImageView selectedImageView;
 
     int[] images = {R.drawable.flores, R.drawable.w_b, R.drawable.gaussiano, R.drawable.negative,
-            R.drawable.sepia, R.drawable.ic_home_black_24dp, R.drawable.ic_cam, R.drawable.tree};
+            R.drawable.sepia, R.drawable.ic_home_black_24dp, R.drawable.ic_cam};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
