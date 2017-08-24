@@ -38,7 +38,7 @@
         <activity android:name=".Cam.CamActivity" />
         <activity android:name=".FilterPreviewActivity" />
         <activity
-            android:name=".FilterViewActivity"
+            android:name=".FilterView.FilterViewActivity"
             android:label="@string/title_activity_filter_view"
             android:theme="@style/AppTheme"></activity>
     </application>
