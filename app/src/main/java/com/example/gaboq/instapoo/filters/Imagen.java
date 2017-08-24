@@ -2,6 +2,8 @@ package com.example.gaboq.instapoo.filters;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
 
 /**
  * Created by jd_cm on 18/8/2017.
@@ -37,7 +39,7 @@ public class Imagen implements IFilter{
 
     @Override
     public Bitmap generateBitmap() {
-        return Bitmap.createBitmap(this.aux,width,height, Bitmap.Config.RGB_565);
+        return Bitmap.createBitmap(this.aux,width,height, Bitmap.Config.ARGB_8888);
     }
 
     @Override
@@ -58,36 +60,39 @@ public class Imagen implements IFilter{
     */
 
     protected class Pixel{
-        byte r;
-        byte g;
-        byte b;
+        int a;
+        int r;
+        int g;
+        int b;
 
         public void setRGB(int r, int g, int b){
-            this.r = (byte) r;
-            this.g = (byte) g;
-            this.b = (byte) b;
+            this.r = r;
+            this.g = g;
+            this.b = b;
         }
 
-        public byte getR() {return r;}
+        public int getR() {return r;}
 
-        public byte getG() {return g;}
+        public int getG() {return g;}
 
-        public byte getB() {return b;}
+        public int getB() {return b;}
 
+        @ColorInt
         public int getValue(){
-            return (this.r & 0xff) << 16 | (this.g & 0xff) << 16 | (this.b & 0xff);
+            return Color.argb(a,r,g,b);
         }
 
         Pixel(int color){
-            this.r = (byte) ((color >> 16) & 0xff);
-            this.g = (byte) ((color >>  8) & 0xff);
-            this.b = (byte) (color & 0xff);
+            this.a = Color.alpha(color);
+            this.r = Color.red(color);
+            this.g = Color.green(color);
+            this.b = Color.blue(color);
         }
     }
 
-    protected byte max(byte n1, byte n2, byte n3){
-        byte temp = 0;
-        byte[] array = {n1,n2,n3};
+    protected int max(int n1, int n2, int n3){
+        int temp = 0;
+        int[] array = {n1,n2,n3};
         for (int i = 0; i <3 ; i++) {
             if(array[i]> temp){
                 temp = array[i];
@@ -96,9 +101,9 @@ public class Imagen implements IFilter{
         return temp;
     }
 
-    protected byte min(byte n1, byte n2, byte n3){
-        byte temp = 0;
-        byte[] array = {n1,n2,n3};
+    protected int min(int n1, int n2, int n3){
+        int temp = 0;
+        int[] array = {n1,n2,n3};
         for (int i = 0; i <3 ; i++) {
             if(array[i] < temp){
                 temp = array[i];
@@ -117,15 +122,4 @@ public class Imagen implements IFilter{
         return height;
     }
 
-    public Pixel[] getPixels() {
-        return pixels;
-    }
-
-    public int[] getAux() {
-        return aux;
-    }
-
-    public long getLength() {
-        return length;
-    }
 }
