@@ -22,12 +22,11 @@ public class Desaturation extends Imagen {
     @Override
     public void applyFilter() {
         for (int i = 0; i <this.length; i++) {
-            int r,g,b;
+            byte r,g,b;
             r = pixels[i].getR();
             g = pixels[i].getG();
             b = pixels[i].getB();
-            int desaturate = ( max(r,g,b)+ min(r,g,b) )/2;
-            desaturate = (byte) desaturate;
+            byte desaturate = (byte) (( max(r,g,b)+ min(r,g,b) )/2);
             pixels[i].setRGB(desaturate,desaturate,desaturate);
             aux[i] = pixels[i].getValue();
         }

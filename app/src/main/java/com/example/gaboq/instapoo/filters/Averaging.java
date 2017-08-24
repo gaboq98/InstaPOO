@@ -26,7 +26,7 @@ public class Averaging extends Imagen {
             r = pixels[i].getR();
             g = pixels[i].getG();
             b = pixels[i].getB();
-            int average = (r+g+b)/3;
+            byte average = (byte) ((r+g+b)/3);
             pixels[i].setRGB(average,average,average);
             aux[i] = pixels[i].getValue();
         }

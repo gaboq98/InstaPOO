@@ -20,10 +20,10 @@ public class Negative extends Imagen {
     @Override
     public void applyFilter() {
         for (int i = 0; i <this.length; i++) {
-            int r,g,b;
-            r = pixels[i].getR()^255;
-            g = pixels[i].getG()^255;
-            b = pixels[i].getB()^255;
+            byte r,g,b;
+            r = (byte) (pixels[i].getR()^255);
+            g = (byte) (pixels[i].getG()^255);
+            b = (byte) (pixels[i].getB()^255);
             pixels[i].setRGB(r,g,b);
             aux[i] = pixels[i].getValue();
         }

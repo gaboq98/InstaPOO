@@ -60,22 +60,22 @@ public class Imagen implements IFilter{
     */
 
     protected class Pixel{
-        int a;
-        int r;
-        int g;
-        int b;
+        byte a;
+        byte r;
+        byte g;
+        byte b;
 
-        public void setRGB(int r, int g, int b){
+        public void setRGB(byte r, byte g, byte b){
             this.r = r;
             this.g = g;
             this.b = b;
         }
 
-        public int getR() {return r;}
+        public byte getR() {return r;}
 
-        public int getG() {return g;}
+        public byte getG() {return g;}
 
-        public int getB() {return b;}
+        public byte getB() {return b;}
 
         @ColorInt
         public int getValue(){
@@ -83,17 +83,17 @@ public class Imagen implements IFilter{
         }
 
         Pixel(int color){
-            this.a = Color.alpha(color);
-            this.r = Color.red(color);
-            this.g = Color.green(color);
-            this.b = Color.blue(color);
+            this.a = (byte) Color.alpha(color);
+            this.r = (byte) Color.red(color);
+            this.g = (byte) Color.green(color);
+            this.b = (byte) Color.blue(color);
         }
     }
 
-    protected int max(int n1, int n2, int n3){
-        int temp = 0;
-        int[] array = {n1,n2,n3};
-        for (int i = 0; i <3 ; i++) {
+    protected byte max(byte n1, byte n2, byte n3){
+        byte temp = 0;
+        byte[] array = {n1,n2,n3};
+        for (byte i = 0; i <3 ; i++) {
             if(array[i]> temp){
                 temp = array[i];
             }
@@ -101,10 +101,10 @@ public class Imagen implements IFilter{
         return temp;
     }
 
-    protected int min(int n1, int n2, int n3){
-        int temp = 0;
-        int[] array = {n1,n2,n3};
-        for (int i = 0; i <3 ; i++) {
+    protected byte min(byte n1, byte n2, byte n3){
+        byte temp = 0;
+        byte[] array = {n1,n2,n3};
+        for (byte i = 0; i <3 ; i++) {
             if(array[i] < temp){
                 temp = array[i];
             }

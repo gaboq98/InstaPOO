@@ -31,30 +31,17 @@ import java.util.List;
 public class GalleryFragment extends BaseFragment implements AbsListView.OnItemClickListener,
         LoaderManager.LoaderCallbacks<List<PhotoItem>> {
 
-
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
     protected OnFragmentInteractionListener mListener;
     protected AbsListView mListView;
     protected PhotoAdapter mAdapter;
     protected ArrayList<PhotoItem> mPhotoListItem;
     protected TextView mEmptyTextView;
     protected ProgressDialog mLoadingProgressDialog;
+
     public GalleryFragment() {
-        // Required empty public constructor
+
     }
 
-
-    //public static GalleryFragment newInstance(String param1, String param2) {
-    //    GalleryFragment fragment = new GalleryFragment();
-    //    Bundle args = new Bundle();
-    //    args.putString(ARG_PARAM1, param1);
-    //    args.putString(ARG_PARAM2, param2);
-    //    fragment.setArguments(args);
-    //    return fragment;
-    //}
 
     public static GalleryFragment newInstance(int sectionNumber) {
         GalleryFragment fragment = new GalleryFragment();

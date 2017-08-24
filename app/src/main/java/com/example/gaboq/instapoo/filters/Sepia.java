@@ -1,6 +1,8 @@
 package com.example.gaboq.instapoo.filters;
 
 import android.graphics.Bitmap;
+import android.util.Log;
+
 
 /**
  * Created by jd_cm on 23/8/2017.
@@ -11,7 +13,11 @@ public class Sepia extends Imagen {
     public Sepia(Bitmap bitmap){
         this.width = bitmap.getWidth();
         this.height = bitmap.getHeight();
-        this.aux = new int[this.height*this.width];
+        try{
+            this.aux = new int[this.height*this.width];
+        }catch(Exception e) {
+            Log.e("takePhoto", "IOException", e);
+        }
         this.pixels = new Pixel[this.height*this.width];
         bitmap.getPixels(aux, 0, this.width, 0, 0, this.width, this.height);
         this.length = this.height*this.width;
@@ -28,7 +34,7 @@ public class Sepia extends Imagen {
             r = (int) Math.floor((r* .393) + (g* .769) + (b* .189));
             g = (int) Math.floor((r* .349) + (g* .686) + (b* .168));
             b = (int) Math.floor((r* .272) + (g* .534) + (b* .131));
-            pixels[i].setRGB(r,g,b);
+            pixels[i].setRGB((byte) r, (byte)g, (byte)b);
             aux[i] = pixels[i].getValue();
         }
     }
