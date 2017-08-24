@@ -1,23 +1,16 @@
 package com.example.gaboq.instapoo;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.gaboq.Cam.CamActivity;
 
-import layout.GalleryFragment;
 import layout.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.navigation_gallery:
+                    Intent gallery = new Intent(MainActivity.this, GalleryTMPActivity.class );
+                    startActivity(gallery);
                     //transaction.replace(R.id.content, new GalleryFragment()).commit();
                     return true;
 
