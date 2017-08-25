@@ -42,9 +42,8 @@ public class CamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cam);
-
         mPhotoCapture = (ImageView) findViewById(R.id.photoCaptureImageView);
-
+        //takePhoto();
 
     }
 
@@ -114,8 +113,6 @@ public class CamActivity extends AppCompatActivity {
         bitmap.inJustDecodeBounds = false;
 
         return BitmapFactory.decodeFile(mImageLocation, bitmap);
-
-
     }
 
 
