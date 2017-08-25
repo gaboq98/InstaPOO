@@ -18,7 +18,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.gaboq.instapoo.MainFactory;
 import com.example.gaboq.instapoo.R;
+import com.example.gaboq.instapoo.filters.IFilter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,7 +53,7 @@ public class CamActivity extends AppCompatActivity {
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
 
         if (requestCode == START_CAMERA_APP && resultCode == RESULT_OK) {
-            rotateImage(reduceImage());
+            rotateImage(Bitmap.createScaledBitmap(reduceImage(), 800, 533, true));
 
         }
     }
@@ -129,6 +131,12 @@ public class CamActivity extends AppCompatActivity {
         Matrix matrix = new Matrix();
         matrix.setRotate(90);
         Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        ///
+        MainFactory mFactory = new MainFactory();
+        IFilter f = mFactory.getInstance(rotatedBitmap, 1);
+        f.applyFilter();
+        rotatedBitmap = f.generateBitmap();
+        ///
         mPhotoCapture.setImageBitmap(rotatedBitmap);
     }
 

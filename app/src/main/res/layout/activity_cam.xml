@@ -12,7 +12,8 @@
         android:id="@+id/photoCaptureImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="Contains Bitmap" />
+        android:contentDescription="Contains Bitmap"
+        android:layout_above="@+id/button" />
 
     <Button
         android:id="@+id/button"
@@ -21,8 +22,11 @@
         android:onClick="takePhoto"
         android:text="Button"
         android:visibility="visible"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
