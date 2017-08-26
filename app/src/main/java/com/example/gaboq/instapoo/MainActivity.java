@@ -11,6 +11,8 @@ import android.view.MenuItem;
 
 import com.example.gaboq.instapoo.Cam.CamActivity;
 
+
+import layout.GalleryFragment;
 import layout.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.navigation_gallery:
-                    //transaction.replace(R.id.content, new GalleryFragment()).commit();
+                    transaction.replace(R.id.content, new GalleryFragment()).commit();
                     return true;
 
                 case R.id.navigation_cam:

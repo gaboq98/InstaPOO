@@ -1,18 +1,23 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="layout.GalleryFragment">
 
+
     <GridView
-        style="@style/GridView.PhotoGallery"
-        android:id="@android:id/list"
-        android:numColumns="3" />
-    <TextView
-        android:id="@+id/empty"
+        android:id="@+id/gridView"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:gravity="center"
-        android:visibility="invisible"/>
-
-</FrameLayout>
+        android:visibility="visible"
+        android:columnWidth="170dp"
+        android:stretchMode="spacingWidthUniform"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp"
+        android:numColumns="auto_fit"
+        />
+</android.support.constraint.ConstraintLayout>

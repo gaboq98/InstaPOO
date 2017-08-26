@@ -31,12 +31,21 @@ public class Sepia extends Imagen {
             r = pixels[i].getR();
             g = pixels[i].getG();
             b = pixels[i].getB();
-            r = (int) Math.floor((r* .393) + (g* .769) + (b* .189));
-            g = (int) Math.floor((r* .349) + (g* .686) + (b* .168));
-            b = (int) Math.floor((r* .272) + (g* .534) + (b* .131));
-            pixels[i].setRGB((byte) r, (byte)g, (byte)b);
+            int R = (int) (r* .393 + g* .769 + b* .189);
+            int G = (int) (r* .349 + g* .686 + b* .168);
+            int B = (int) (r* .272 + g* .534 + b* .131);
+            R = checkMaximum(R);
+            G = checkMaximum(G);
+            B = checkMaximum(B);
+            pixels[i].setRGB(R,G,B);
             aux[i] = pixels[i].getValue();
         }
+    }
+    private int checkMaximum(int val){
+        if (val>255){
+            val = 255;
+        }
+        return val;
     }
 
 }

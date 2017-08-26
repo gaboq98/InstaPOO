@@ -65,7 +65,7 @@ public class Imagen implements IFilter{
         byte g;
         byte b;
 
-        public void setRGB(byte r, byte g, byte b){
+        public void setRGB(int r, int g, int b){
             this.r = r;
             this.g = g;
             this.b = b;
@@ -101,10 +101,17 @@ public class Imagen implements IFilter{
         return temp;
     }
 
+<<<<<<< HEAD
     protected byte min(byte n1, byte n2, byte n3){
         byte temp = 0;
         byte[] array = {n1,n2,n3};
         for (byte i = 0; i <3 ; i++) {
+=======
+    protected int min(int n1, int n2, int n3){
+        int temp =255;
+        int[] array = {n1,n2,n3};
+        for (int i = 0; i <3 ; i++) {
+>>>>>>> Gallery
             if(array[i] < temp){
                 temp = array[i];
             }
