@@ -23,19 +23,15 @@ import com.example.gaboq.instapoo.R;
 import com.example.gaboq.instapoo.filters.IFilter;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 
-import static com.example.gaboq.instapoo.R.id.imageView;
-import static java.io.File.createTempFile;
 
 public class CamActivity extends AppCompatActivity {
 
     private ImageView mPhotoCapture;
 
-    private static final int START_CAMERA_APP = 1;      //Antes tenía un 0
+    private static final int START_CAMERA_APP = 1;
 
     private String mImageLocation = "";
 
@@ -44,9 +40,7 @@ public class CamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cam);
-
         mPhotoCapture = (ImageView) findViewById(R.id.photoCaptureImageView);
-
 
     }
 
@@ -54,7 +48,7 @@ public class CamActivity extends AppCompatActivity {
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
 
         if (requestCode == START_CAMERA_APP && resultCode == RESULT_OK) {
-            rotateImage(reduceImage());
+            rotateImage(Bitmap.createScaledBitmap(reduceImage(), 800, 533, true));
 
         }
     }
@@ -69,7 +63,6 @@ public class CamActivity extends AppCompatActivity {
             try {
                 photoFile = createImageFile();
             } catch (IOException e) {
-                ///e.printStackTrace();
                 Log.e("takePhoto", "IOException", e);
                 return;
             }
@@ -116,8 +109,6 @@ public class CamActivity extends AppCompatActivity {
         bitmap.inJustDecodeBounds = false;
 
         return BitmapFactory.decodeFile(mImageLocation, bitmap);
-
-
     }
 
 
@@ -134,13 +125,13 @@ public class CamActivity extends AppCompatActivity {
         Matrix matrix = new Matrix();
         matrix.setRotate(90);
         Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-
-        MainFactory mainFactory = new MainFactory();
-        IFilter filter = mainFactory.getInstance(rotatedBitmap,5);
-        filter.applyFilter();
-        Bitmap bitmap1 = filter.generateBitmap();
-
-        mPhotoCapture.setImageBitmap(bitmap1);
+        ///
+        MainFactory mFactory = new MainFactory();
+        IFilter f = mFactory.getInstance(rotatedBitmap, 1);
+        f.applyFilter();
+        rotatedBitmap = f.generateBitmap();
+        ///
+        mPhotoCapture.setImageBitmap(rotatedBitmap);
     }
 
 
