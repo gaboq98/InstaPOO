@@ -23,19 +23,15 @@ import com.example.gaboq.instapoo.R;
 import com.example.gaboq.instapoo.filters.IFilter;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 
-import static com.example.gaboq.instapoo.R.id.imageView;
-import static java.io.File.createTempFile;
 
 public class CamActivity extends AppCompatActivity {
 
     private ImageView mPhotoCapture;
 
-    private static final int START_CAMERA_APP = 1;      //Antes tenía un 0
+    private static final int START_CAMERA_APP = 1;
 
     private String mImageLocation = "";
 
@@ -45,7 +41,6 @@ public class CamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cam);
         mPhotoCapture = (ImageView) findViewById(R.id.photoCaptureImageView);
-        //takePhoto();
 
     }
 
@@ -68,7 +63,6 @@ public class CamActivity extends AppCompatActivity {
             try {
                 photoFile = createImageFile();
             } catch (IOException e) {
-                ///e.printStackTrace();
                 Log.e("takePhoto", "IOException", e);
                 return;
             }

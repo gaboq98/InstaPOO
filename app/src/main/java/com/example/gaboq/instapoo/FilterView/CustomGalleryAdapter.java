@@ -1,11 +1,18 @@
 package com.example.gaboq.instapoo.FilterView;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
+
+import com.example.gaboq.instapoo.MainFactory;
+import com.example.gaboq.instapoo.filters.IFilter;
 
 /*
  * Created by gaboq on 24/8/2017.
@@ -42,9 +49,20 @@ public class CustomGalleryAdapter extends BaseAdapter {
 
         ImageView imageView = new ImageView(context);
         imageView.setImageResource(images[position]); // set image in ImageView
+        //////
+        //Drawable d = imageView.getResources().getDrawable(images[position]);
+        //Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
+        //bitmap = Bitmap.createScaledBitmap(bitmap, 800, 533, true);
+        //MainFactory mFactory = new MainFactory();
+        //IFilter f = mFactory.getInstance(bitmap, position);
+        //f.applyFilter();
+        //bitmap = f.generateBitmap();
+        //imageView.setImageBitmap(bitmap);
+        //////
         imageView.setLayoutParams(new Gallery.LayoutParams(200, 200)); // set ImageView param
         return imageView;
     }
+
 
 
 }
