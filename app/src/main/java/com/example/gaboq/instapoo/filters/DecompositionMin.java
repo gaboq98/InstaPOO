@@ -21,11 +21,11 @@ public class DecompositionMin extends Imagen {
     @Override
     public void applyFilter() {
         for (int i = 0; i <this.length; i++) {
-            byte r,g,b;
+            int r,g,b;
             r = pixels[i].getR();
             g = pixels[i].getG();
             b = pixels[i].getB();
-            byte minValue = min(r,g,b);
+            int minValue = min(r,g,b);
             pixels[i].setRGB(minValue,minValue,minValue);
             aux[i] = pixels[i].getValue();
         }

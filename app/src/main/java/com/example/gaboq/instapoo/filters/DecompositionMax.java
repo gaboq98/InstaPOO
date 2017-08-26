@@ -22,11 +22,11 @@ public class DecompositionMax extends Imagen {
     @Override
     public void applyFilter() {
         for (int i = 0; i <this.length; i++) {
-            byte r,g,b;
+            int r,g,b;
             r = pixels[i].getR();
             g = pixels[i].getG();
             b = pixels[i].getB();
-            byte maxValue = max(r,g,b);
+            int maxValue = max(r,g,b);
             pixels[i].setRGB(maxValue,maxValue,maxValue);
             aux[i] = pixels[i].getValue();
         }
