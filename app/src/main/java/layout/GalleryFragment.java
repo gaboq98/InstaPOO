@@ -30,7 +30,6 @@ public class GalleryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_gallery, container, false);
         list = imageReader(Environment.getExternalStorageDirectory());
-
         gv = (GridView) v.findViewById(R.id.gridView);
         gv.setAdapter(new GridAdapter());
 
@@ -58,7 +57,7 @@ public class GalleryFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = getActivity().getLayoutInflater().inflate(R.layout.single_grid, parent ,false);
             ImageView iv = (ImageView) convertView.findViewById(R.id.imageView2);
-            iv.setImageURI(Uri.parse( getItem(position).toString() ));
+            iv.setImageURI(Uri.parse(getItem(position).toString()));
             return convertView;
         }
     }

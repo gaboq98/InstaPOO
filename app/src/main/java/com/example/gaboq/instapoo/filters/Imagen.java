@@ -102,7 +102,7 @@ public class Imagen implements IFilter{
     }
 
     protected int min(int n1, int n2, int n3){
-        int temp = 0;
+        int temp =255;
         int[] array = {n1,n2,n3};
         for (int i = 0; i <3 ; i++) {
             if(array[i] < temp){

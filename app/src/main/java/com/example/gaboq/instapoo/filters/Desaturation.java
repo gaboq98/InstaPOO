@@ -26,9 +26,8 @@ public class Desaturation extends Imagen {
             r = pixels[i].getR();
             g = pixels[i].getG();
             b = pixels[i].getB();
-            int desaturate = ( max(r,g,b)+ min(r,g,b) )/2;
-            desaturate = (byte) desaturate;
-            pixels[i].setRGB(desaturate,desaturate,desaturate);
+            int desaturated = ( max(r,g,b) + min(r,g,b) )/2;
+            pixels[i].setRGB(desaturated,desaturated,desaturated);
             aux[i] = pixels[i].getValue();
         }
     }

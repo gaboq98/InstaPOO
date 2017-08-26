@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 
@@ -21,6 +22,8 @@ public class CamActivity extends AppCompatActivity {
     private ImageView mPhotoCapture;
 
     private static final int START_CAMERA_APP = 0;
+    MainFactory mFactory = new MainFactory();
+    Bitmap image;
 
 
     @Override
@@ -45,13 +48,29 @@ public class CamActivity extends AppCompatActivity {
 
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
-            MainFactory mFactory = new MainFactory();
-            IFilter f = mFactory.getInstance(bitmap, 6);
-            f.applyFilter();
-            bitmap = f.generateBitmap();
+            image = bitmap;
             mPhotoCapture.setImageBitmap(bitmap);
 
         }
+    }
+
+    protected void btnClick(View v){
+        IFilter filter;
+        switch (v.getId()){
+            case R.id.button1:
+                filter = mFactory.getInstance(image,4);
+                break;
+            case R.id.button2:
+                filter = mFactory.getInstance(image,2);
+                break;
+            case R.id.button3:
+                filter = mFactory.getInstance(image,3);
+                break;
+            default:
+                filter = mFactory.getInstance(image,6);
+        }
+        filter.applyFilter();
+        mPhotoCapture.setImageBitmap(filter.generateBitmap());
     }
 
 }

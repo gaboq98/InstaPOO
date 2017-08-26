@@ -11,10 +11,14 @@ import android.view.MenuItem;
 
 import com.example.gaboq.Cam.CamActivity;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import layout.GalleryFragment;
 import layout.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
+    ArrayList<File> list;
 
     public static final int SELECT_PHOTO_ACTION = 0;
 
@@ -31,10 +35,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.navigation_gallery:
-                    //Intent gallery = new Intent(MainActivity.this, GalleryTMPActivity.class );
-                    //startActivity(gallery);
                     transaction.replace(R.id.content, new GalleryFragment()).commit();
-                    //setContentView(R.layout.fragment_gallery);
                     return true;
 
                 case R.id.navigation_cam:
