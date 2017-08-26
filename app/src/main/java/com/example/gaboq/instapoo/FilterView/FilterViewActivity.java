@@ -1,8 +1,10 @@
 package com.example.gaboq.instapoo.FilterView;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,6 +15,8 @@ import android.widget.ImageView;
 import com.example.gaboq.instapoo.MainFactory;
 import com.example.gaboq.instapoo.R;
 import com.example.gaboq.instapoo.filters.IFilter;
+
+import java.io.File;
 
 public class FilterViewActivity extends AppCompatActivity {
 
@@ -27,8 +31,15 @@ public class FilterViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_view);
+
+        String i = getIntent().getStringExtra("img");
+
+
         simpleGallery = (Gallery) findViewById(R.id.simpleGallery);
         selectedImageView = (ImageView) findViewById(R.id.selectedImageView);
+
+        selectedImageView.setImageURI(Uri.parse(i));
+
         customGalleryAdapter = new CustomGalleryAdapter(getApplicationContext(), images);
         simpleGallery.setAdapter(customGalleryAdapter);
         simpleGallery.setSpacing(10);
