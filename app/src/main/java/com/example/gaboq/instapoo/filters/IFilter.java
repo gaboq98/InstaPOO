@@ -4,11 +4,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 /**
- * Created by Josu on 20/8/2017.
+ * Created by Admin on 20/8/2017.
  */
 
 public interface IFilter {
-    Bitmap generateBitmap();
-    void applyFilter();
-    Bitmap generatePreview(Bitmap bitmap, Canvas canvas);
+    public Bitmap generateBitmap();
+    public void applyFilter();
+    public Bitmap generatePreview(Bitmap bitmap, Canvas canvas);
 }

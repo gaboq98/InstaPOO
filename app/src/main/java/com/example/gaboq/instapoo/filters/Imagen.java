@@ -60,7 +60,7 @@ public class Imagen implements IFilter{
     */
 
     protected class Pixel{
-        byte a;
+        int a;
         int r;
         int g;
         int b;
@@ -83,24 +83,23 @@ public class Imagen implements IFilter{
         }
 
         Pixel(int color){
-            this.a = (byte) Color.alpha(color);
-            this.r = (byte) Color.red(color);
-            this.g = (byte) Color.green(color);
-            this.b = (byte) Color.blue(color);
+            this.a = Color.alpha(color);
+            this.r = Color.red(color);
+            this.g = Color.green(color);
+            this.b = Color.blue(color);
         }
     }
 
     protected int max(int n1, int n2, int n3){
         int temp = 0;
         int[] array = {n1,n2,n3};
-        for (byte i = 0; i <3 ; i++) {
+        for (int i = 0; i <3 ; i++) {
             if(array[i]> temp){
                 temp = array[i];
             }
         }
         return temp;
     }
-
 
     protected int min(int n1, int n2, int n3){
         int temp =255;
