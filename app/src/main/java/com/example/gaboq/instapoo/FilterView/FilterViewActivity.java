@@ -21,7 +21,7 @@ public class FilterViewActivity extends AppCompatActivity {
     ImageView selectedImageView;
 
     int[] images = {R.drawable.flores, R.drawable.w_b, R.drawable.gaussiano, R.drawable.negative,
-            R.drawable.sepia, R.drawable.ic_home_black_24dp};
+            R.drawable.sepia};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class FilterViewActivity extends AppCompatActivity {
                 Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
                 bitmap = Bitmap.createScaledBitmap(bitmap, 640, 480, true);
                 MainFactory mFactory = new MainFactory();
-                IFilter f = mFactory.getInstance(bitmap, position);
+                IFilter f = mFactory.getInstance(bitmap, position + 1);
                 f.applyFilter();
                 bitmap = f.generateBitmap();
                 selectedImageView.setImageBitmap(bitmap);

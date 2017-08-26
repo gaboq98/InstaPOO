@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import com.example.gaboq.instapoo.Cam.CamActivity;
 import com.example.gaboq.instapoo.FilterView.FilterViewActivity;
 
-
 import layout.GalleryFragment;
 import layout.MainFragment;
 

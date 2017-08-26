@@ -5,13 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.icu.text.SimpleDateFormat;
-import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,9 +28,10 @@ public class CamActivity extends AppCompatActivity {
 
     private ImageView mPhotoCapture;
 
-    private static final int START_CAMERA_APP = 1;
+    private static final int START_CAMERA_APP = 0;
 
     private String mImageLocation = "";
+
 
 
     @Override
@@ -54,12 +52,12 @@ public class CamActivity extends AppCompatActivity {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     public void takePhoto(View view) {
         Intent callCamera = new Intent();
         callCamera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
         if (callCamera.resolveActivity(getPackageManager()) != null) {
-            File photoFile = null;
+            File photoFile;
             try {
                 photoFile = createImageFile();
             } catch (IOException e) {
@@ -77,10 +75,13 @@ public class CamActivity extends AppCompatActivity {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     private File createImageFile() throws IOException {
 
-        String time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String time = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        }
 
         String imageFileName = "IMG" + time + "_";
         File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -104,8 +105,7 @@ public class CamActivity extends AppCompatActivity {
 
         int cameraImageWidth = bitmap.outWidth;
         int cameraImageHeight = bitmap.outHeight;
-        int scale = Math.min(cameraImageWidth/imageViewWidth, cameraImageHeight/imageViewHeigth);
-        bitmap.inSampleSize = scale;
+        bitmap.inSampleSize = Math.min(cameraImageWidth/imageViewWidth, cameraImageHeight/imageViewHeigth);
         bitmap.inJustDecodeBounds = false;
 
         return BitmapFactory.decodeFile(mImageLocation, bitmap);
@@ -113,21 +113,12 @@ public class CamActivity extends AppCompatActivity {
 
 
     private void rotateImage(Bitmap bitmap) {
-        ExifInterface exifInterface = null;
-        try {
-            exifInterface = new ExifInterface(mImageLocation);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,
-                ExifInterface.ORIENTATION_UNDEFINED);       //Siempre retorna 0
-
         Matrix matrix = new Matrix();
         matrix.setRotate(90);
         Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         ///
         MainFactory mFactory = new MainFactory();
-        IFilter f = mFactory.getInstance(rotatedBitmap, 1);
+        IFilter f = mFactory.getInstance(rotatedBitmap, 5);
         f.applyFilter();
         rotatedBitmap = f.generateBitmap();
         ///
