@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.gaboq.instapoo.MainFactory;
@@ -33,12 +34,13 @@ public class CamActivity extends AppCompatActivity {
     private String mImageLocation = "";
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cam);
         mPhotoCapture = (ImageView) findViewById(R.id.photoCaptureImageView);
+        Button mButton = (Button) findViewById(R.id.button);
+        mButton.performClick();
 
     }
 
@@ -50,7 +52,6 @@ public class CamActivity extends AppCompatActivity {
 
         }
     }
-
 
 
     public void takePhoto(View view) {
@@ -97,8 +98,8 @@ public class CamActivity extends AppCompatActivity {
 
     private Bitmap reduceImage() {
 
-        int imageViewWidth = mPhotoCapture.getWidth();
-        int imageViewHeigth = mPhotoCapture.getHeight();
+        int imageViewWidth = 1080;        //mPhotoCapture.getWidth();
+        int imageViewHeigth = 1704;      //mPhotoCapture.getHeight();
         BitmapFactory.Options bitmap = new BitmapFactory.Options();
         bitmap.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(mImageLocation, bitmap);

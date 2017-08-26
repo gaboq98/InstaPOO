@@ -20,8 +20,8 @@ public class FilterViewActivity extends AppCompatActivity {
     CustomGalleryAdapter customGalleryAdapter;
     ImageView selectedImageView;
 
-    int[] images = {R.drawable.flores, R.drawable.w_b, R.drawable.gaussiano, R.drawable.negative,
-            R.drawable.sepia};
+    int[] images = {R.drawable.flores, R.drawable.w_b, R.drawable.gaussiano,
+            R.drawable.sepia, R.drawable.negative};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
