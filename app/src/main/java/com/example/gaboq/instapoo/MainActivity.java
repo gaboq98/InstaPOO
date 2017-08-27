@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.example.gaboq.instapoo.Cam.CamActivity;
 import com.example.gaboq.instapoo.FilterView.FilterViewActivity;
 
+import layout.GalleryFragment;
 import layout.MainFragment;
 
 
@@ -32,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.navigation_gallery:
-                    //transaction.replace(R.id.content, new GalleryFragment()).commit();
-                    Intent intent0 = new Intent(MainActivity.this, FilterViewActivity.class);
-                    startActivity(intent0);
+                    transaction.replace(R.id.content, new GalleryFragment()).commit();
+                    //Intent intent0 = new Intent(MainActivity.this, FilterViewActivity.class);
+                    //startActivity(intent0);
                     return true;
 
                 case R.id.navigation_cam:

@@ -2,6 +2,7 @@ package layout;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -9,10 +10,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.example.gaboq.instapoo.FilterView.FilterViewActivity;
 import com.example.gaboq.instapoo.R;
 
 import java.io.File;
@@ -32,6 +35,14 @@ public class GalleryFragment extends Fragment {
         list = imageReader(Environment.getExternalStorageDirectory());
         gv = (GridView) v.findViewById(R.id.gridView);
         gv.setAdapter(new GridAdapter());
+
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(),FilterViewActivity.class).putExtra("img",list.get(position).toString());
+                startActivity(intent);
+            }
+        });
 
         return v;
     }
@@ -61,6 +72,7 @@ public class GalleryFragment extends Fragment {
             return convertView;
         }
     }
+
 
     ArrayList<File> imageReader(File root){
         ArrayList<File> a = new ArrayList<>();
