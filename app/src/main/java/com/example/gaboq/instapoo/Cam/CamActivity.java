@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.gaboq.instapoo.FilterView.FilterViewActivity;
 import com.example.gaboq.instapoo.MainFactory;
 import com.example.gaboq.instapoo.R;
 import com.example.gaboq.instapoo.filters.IFilter;
@@ -117,13 +118,15 @@ public class CamActivity extends AppCompatActivity {
         Matrix matrix = new Matrix();
         matrix.setRotate(90);
         Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-        ///
+        /*
         MainFactory mFactory = new MainFactory();
         IFilter f = mFactory.getInstance(rotatedBitmap, 6);
         f.applyFilter();
         rotatedBitmap = f.generateBitmap();
-        ///
-        mPhotoCapture.setImageBitmap(rotatedBitmap);
+        */
+        Intent intent = new Intent(this,FilterViewActivity.class).putExtra("img",mImageLocation);
+        startActivity(intent);
+        //mPhotoCapture.setImageBitmap(rotatedBitmap);
     }
 
 
