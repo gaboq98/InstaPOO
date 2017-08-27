@@ -6,7 +6,6 @@ import com.example.gaboq.instapoo.filters.Averaging;
 import com.example.gaboq.instapoo.filters.DecompositionMax;
 import com.example.gaboq.instapoo.filters.DecompositionMin;
 import com.example.gaboq.instapoo.filters.Desaturation;
-import com.example.gaboq.instapoo.filters.GaussianBlur;
 import com.example.gaboq.instapoo.filters.IFilter;
 import com.example.gaboq.instapoo.filters.Imagen;
 import com.example.gaboq.instapoo.filters.Negative;
