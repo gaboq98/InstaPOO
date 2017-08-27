@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.example.gaboq.instapoo.MainFactory;
 import com.example.gaboq.instapoo.R;
 import com.example.gaboq.instapoo.filters.IFilter;
+import com.example.gaboq.instapoo.filters.Imagen;
 
 public class FilterViewActivity extends AppCompatActivity {
 
@@ -50,7 +51,7 @@ public class FilterViewActivity extends AppCompatActivity {
                 //Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
                 Bitmap bitmap;
                 bitmap = BitmapFactory.decodeFile(imageString);
-                bitmap = Bitmap.createScaledBitmap(bitmap, Imagen.check(bitmap.getHeight()), Imagen.check(bitmapt.getWidth()), true);
+                bitmap = Bitmap.createScaledBitmap(bitmap, Imagen.check(bitmap.getHeight()), Imagen.check(bitmap.getWidth()), true);
                 IFilter f = mFactory.getInstance(bitmap, position);
                 bitmap = f.generateBitmap();
                 selectedImageView.setImageBitmap(bitmap);

@@ -19,7 +19,7 @@ public class Negative extends Imagen {
     }
 
     @Override
-    private void applyFilter() {
+    public void applyFilter() {
         for (int i = 0; i <this.length; i++) {
             int r,g,b;
             r = pixels[i].getR()^255;
