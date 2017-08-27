@@ -1,12 +1,15 @@
 package layout;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,19 +38,24 @@ public class GalleryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_gallery, container, false);
 
-        list = imageReader(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM));
+        if(ContextCompat.checkSelfPermission(getActivity().getApplicationContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED ){
 
-        gv = (GridView) v.findViewById(R.id.gridView);
-        gv.setAdapter(new GridAdapter());
+            list = imageReader(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM));
 
-        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),FilterViewActivity.class).putExtra("img",list.get(position).toString());
-                startActivity(intent);
-            }
-        });
+            gv = (GridView) v.findViewById(R.id.gridView);
+            gv.setAdapter(new GridAdapter());
+            gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity(),
+                            FilterViewActivity.class).putExtra("img",list.get(position).toString());
+                    startActivity(intent);
+                }
+            });
+        }else{
 
+        }
         return v;
     }
 
