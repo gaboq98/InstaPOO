@@ -37,6 +37,13 @@ public class Imagen implements IFilter{
         }
     }
 
+    public static int check(int value){
+            if (value>2000){
+                value =value/2.2
+            }
+            return value
+    }
+
     @Override
     public Bitmap generateBitmap() {
         return Bitmap.createBitmap(this.aux,width,height, Bitmap.Config.ARGB_8888);

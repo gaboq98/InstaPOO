@@ -50,13 +50,10 @@ public class FilterViewActivity extends AppCompatActivity {
                 //Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
                 Bitmap bitmap;
                 bitmap = BitmapFactory.decodeFile(imageString);
-                //bitmap = Bitmap.createScaledBitmap(bitmap, parent.getHeight(), parent.getWidth(), true);
+                bitmap = Bitmap.createScaledBitmap(bitmap, Imagen.check(bitmap.getHeight()), Imagen.check(bitmapt.getWidth()), true);
                 IFilter f = mFactory.getInstance(bitmap, position);
-                f.applyFilter();
                 bitmap = f.generateBitmap();
                 selectedImageView.setImageBitmap(bitmap);
-
-
             }
         });
     }

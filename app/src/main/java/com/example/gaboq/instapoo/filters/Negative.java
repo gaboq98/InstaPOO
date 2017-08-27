@@ -15,10 +15,11 @@ public class Negative extends Imagen {
         bitmap.getPixels(aux, 0, this.width, 0, 0, this.width, this.height);
         this.length = this.height*this.width;
         fillpixels();
+        applyFilter();
     }
 
     @Override
-    public void applyFilter() {
+    private void applyFilter() {
         for (int i = 0; i <this.length; i++) {
             int r,g,b;
             r = pixels[i].getR()^255;
