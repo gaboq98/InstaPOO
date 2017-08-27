@@ -119,7 +119,7 @@ public class CamActivity extends AppCompatActivity {
         Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         ///
         MainFactory mFactory = new MainFactory();
-        IFilter f = mFactory.getInstance(rotatedBitmap, 5);
+        IFilter f = mFactory.getInstance(rotatedBitmap, 6);
         f.applyFilter();
         rotatedBitmap = f.generateBitmap();
         ///

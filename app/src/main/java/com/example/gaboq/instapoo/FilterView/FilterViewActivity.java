@@ -27,7 +27,8 @@ public class FilterViewActivity extends AppCompatActivity {
     ImageView selectedImageView;
 
     int[] images = {R.drawable.flores, R.drawable.w_b, R.drawable.gaussiano,
-            R.drawable.sepia, R.drawable.negative};
+            R.drawable.sepia, R.drawable.negative, R.drawable.margaritas};
+
     MainFactory mFactory = new MainFactory();
 
     @Override
@@ -64,7 +65,6 @@ public class FilterViewActivity extends AppCompatActivity {
                 bitmap = f.generateBitmap();
                 selectedImageView.setImageBitmap(bitmap);
 
-                //selectedImageView.setImageResource(images[position]);
 
             }
         });
