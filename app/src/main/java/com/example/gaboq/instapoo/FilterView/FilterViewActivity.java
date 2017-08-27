@@ -28,20 +28,20 @@ public class FilterViewActivity extends AppCompatActivity {
 
     int[] images = {R.drawable.flores, R.drawable.w_b, R.drawable.gaussiano,
             R.drawable.sepia, R.drawable.negative};
+    MainFactory mFactory = new MainFactory();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_view);
 
-        final String i = getIntent().getStringExtra("img");
+        final String imageString = getIntent().getStringExtra("img");
 
 
         simpleGallery = (Gallery) findViewById(R.id.simpleGallery);
         selectedImageView = (ImageView) findViewById(R.id.selectedImageView);
-
-        selectedImageView.setImageURI(Uri.parse(i));
-
+        final Uri uri = Uri.parse(imageString);
+        selectedImageView.setImageURI(uri);
         customGalleryAdapter = new CustomGalleryAdapter(getApplicationContext(), images);
         simpleGallery.setAdapter(customGalleryAdapter);
         simpleGallery.setSpacing(10);
@@ -53,13 +53,12 @@ public class FilterViewActivity extends AppCompatActivity {
                 //Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
                 Bitmap bitmap = null;
                 try {
-                    bitmap = MediaStore.Images.Media.getBitmap(FilterViewActivity.this.getContentResolver(), Uri.parse(i));
+                    bitmap = MediaStore.Images.Media.getBitmap(FilterViewActivity.this.getContentResolver(),uri);
                 } catch (IOException e) {
                     Drawable d = getResources().getDrawable(images[position]);
                     bitmap = ((BitmapDrawable)d).getBitmap();
                 }
                 bitmap = Bitmap.createScaledBitmap(bitmap, 640, 480, true);
-                MainFactory mFactory = new MainFactory();
                 IFilter f = mFactory.getInstance(bitmap, position + 1);
                 f.applyFilter();
                 bitmap = f.generateBitmap();
