@@ -21,6 +21,8 @@ import com.example.gaboq.instapoo.R;
 import java.io.File;
 import java.util.ArrayList;
 
+import static android.os.Environment.DIRECTORY_DCIM;
+
 public class GalleryFragment extends Fragment {
     GridView gv;
     ArrayList<File> list;
@@ -32,7 +34,7 @@ public class GalleryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_gallery, container, false);
-        list = imageReader(Environment.getExternalStorageDirectory());
+        list = imageReader(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM));
         gv = (GridView) v.findViewById(R.id.gridView);
         gv.setAdapter(new GridAdapter());
 
