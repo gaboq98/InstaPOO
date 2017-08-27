@@ -15,16 +15,15 @@
         android:id="@+id/selectedImageView"
         android:layout_width="fill_parent"
         android:layout_height="290dp"
-        android:layout_weight="0.32"
-        android:scaleType="fitXY" />
+        android:layout_weight="0.68" />
 
     <Gallery
         android:id="@+id/simpleGallery"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginTop="100dp"
-        android:layout_weight="0.51"
+        android:layout_marginTop="25dp"
+        android:layout_weight="0.33"
         android:unselectedAlpha="0.80" />
 
 

@@ -16,20 +16,30 @@ import com.example.gaboq.instapoo.filters.Sepia;
  */
 
 public class MainFactory {
+    final static int ORIGINAL_IMAGE = 0;
+    final static int AVERAGING_IMAGE = 1;
+    final static int DESATURATION_IMAGE = 2;
+    final static int DECOMPOSITION_MIN_IMAGE = 3;
+    final static int DECOMPOSITION_MAX_IMAGE = 4;
+    final static int SEPIA_IMAGE = 5;    
+    final static int NEGATIVE_IMAGE  = 6;
+    final static int GAUSSIAN_BLUR = 7;
 
     public IFilter getInstance(Bitmap bitmap, int opcion){
         switch (opcion){
-            case 1:
+            case ORIGINAL_IMAGE:
+                return new Imagen(bitmap);
+            case AVERAGING_IMAGE:
                 return new Averaging(bitmap);
-            case 2:
+            case DESATURATION_IMAGE:
                 return new Desaturation(bitmap);
-            case 3:
+            case DECOMPOSITION_MIN_IMAGE:
                 return new DecompositionMin(bitmap);
-            case 4:
+            case DECOMPOSITION_MAX_IMAGE:
                 return new DecompositionMax(bitmap);
-            case 5:
+            case SEPIA_IMAGE:
                 return new Sepia(bitmap);
-            case 6:
+            case NEGATIVE_IMAGE:
                 return new Negative(bitmap);
             default:
                 return new Imagen(bitmap);
