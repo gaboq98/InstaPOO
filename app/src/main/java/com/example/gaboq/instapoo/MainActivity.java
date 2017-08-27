@@ -1,6 +1,9 @@
 package com.example.gaboq.instapoo;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -33,9 +36,14 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.navigation_gallery:
-                    transaction.replace(R.id.content, new GalleryFragment()).commit();
-                    //Intent intent0 = new Intent(MainActivity.this, FilterViewActivity.class);
-                    //startActivity(intent0);
+                    //transaction.replace(R.id.content, new GalleryFragment()).commit();
+                    Bitmap mBitmap = null;
+                    Drawable d = getResources().getDrawable(R.drawable.flores);
+                    mBitmap = ((BitmapDrawable)d).getBitmap();
+                    mBitmap = Bitmap.createScaledBitmap(mBitmap, 640, 480, true);
+                    Intent intent0 = new Intent(MainActivity.this, FilterViewActivity.class);
+                    //intent0.putExtra("Bitmap", mBitmap);
+                    startActivity(intent0);
                     return true;
 
                 case R.id.navigation_cam:

@@ -1,7 +1,5 @@
 package layout;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,7 +19,6 @@ import com.example.gaboq.instapoo.R;
 import java.io.File;
 import java.util.ArrayList;
 
-import static android.os.Environment.DIRECTORY_DCIM;
 
 public class GalleryFragment extends Fragment {
     GridView gv;
@@ -35,7 +32,7 @@ public class GalleryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_gallery, container, false);
 
-        list = imageReader(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM));
+        list = imageReader(Environment.getExternalStorageDirectory());
 
         gv = (GridView) v.findViewById(R.id.gridView);
         gv.setAdapter(new GridAdapter());
@@ -51,7 +48,7 @@ public class GalleryFragment extends Fragment {
         return v;
     }
 
-    class GridAdapter extends BaseAdapter {
+    private class GridAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
