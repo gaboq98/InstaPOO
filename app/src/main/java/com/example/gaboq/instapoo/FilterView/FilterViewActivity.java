@@ -65,7 +65,6 @@ public class FilterViewActivity extends AppCompatActivity {
                 bitmap = f.generateBitmap();
                 selectedImageView.setImageBitmap(bitmap);
 
-                //selectedImageView.setImageResource(images[position]);
 
             }
         });
