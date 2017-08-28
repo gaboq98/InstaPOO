@@ -17,6 +17,7 @@ public class Desaturation extends Imagen {
         bitmap.getPixels(aux, 0, this.width, 0, 0, this.width, this.height);
         this.length = this.height*this.width;
         fillpixels();
+        applyFilter();
     }
 
     @Override

@@ -43,5 +43,4 @@
         android:text="Edit"
         android:textColor="@android:color/black" />
 
-
 </RelativeLayout>

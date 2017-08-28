@@ -14,8 +14,10 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
+
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,9 +26,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.gaboq.instapoo.FilterView.FilterViewActivity;
-import com.example.gaboq.instapoo.MainFactory;
+
 import com.example.gaboq.instapoo.R;
-import com.example.gaboq.instapoo.filters.IFilter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -128,7 +129,9 @@ public class CamActivity extends AppCompatActivity {
 
         String time = null;
         time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "IMG" + time + "_";
+
+        String imageFileName = "IMG" + time;
+
         File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
         File imageFile = File.createTempFile(imageFileName, ".jpg", storageDirectory);
@@ -161,7 +164,11 @@ public class CamActivity extends AppCompatActivity {
         Matrix matrix = new Matrix();
         matrix.setRotate(90);
         Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        Bitmap.createScaledBitmap(reduceImage(), 800, 533, true);
         mPhotoCapture.setImageBitmap(rotatedBitmap);
+        Intent intent = new Intent(this,FilterViewActivity.class).putExtra("img",mImageLocation);
+        startActivity(intent);
+
     }
 
 

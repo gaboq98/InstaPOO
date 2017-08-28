@@ -12,7 +12,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
-        renderscriptTargetApi 19
+        renderscriptTargetApi 18
         renderscriptSupportModeEnabled true
 
     }

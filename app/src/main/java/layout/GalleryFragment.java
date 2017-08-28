@@ -1,10 +1,16 @@
 package layout;
 
+
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.gaboq.instapoo.FilterView.FilterViewActivity;
 import com.example.gaboq.instapoo.R;
@@ -19,10 +26,13 @@ import com.example.gaboq.instapoo.R;
 import java.io.File;
 import java.util.ArrayList;
 
+import static android.os.Environment.DIRECTORY_DCIM;
+
 
 public class GalleryFragment extends Fragment {
     GridView gv;
     ArrayList<File> list;
+    private OnFragmentInteractionListener mListener;
     public GalleryFragment() {
 
     }
@@ -32,19 +42,23 @@ public class GalleryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_gallery, container, false);
 
-        list = imageReader(Environment.getExternalStorageDirectory());
 
-        gv = (GridView) v.findViewById(R.id.gridView);
-        gv.setAdapter(new GridAdapter());
+        if(ContextCompat.checkSelfPermission(getActivity().getApplicationContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED ){
 
-        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),FilterViewActivity.class).putExtra("img",list.get(position).toString());
-                startActivity(intent);
-            }
-        });
 
+            list = imageReader(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM));
+
+            gv = (GridView) v.findViewById(R.id.gridView);
+            gv.setAdapter(new GridAdapter());
+            gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity(), FilterViewActivity.class).putExtra("img",list.get(position).toString());
+                    startActivity(intent);
+                }
+            });
+        }
         return v;
     }
 
@@ -91,4 +105,19 @@ public class GalleryFragment extends Fragment {
         return a;
     }
 
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            OnFragmentInteractionListener mListener = (OnFragmentInteractionListener) context;
+        } else {
+            Toast.makeText(context, "Gallery", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

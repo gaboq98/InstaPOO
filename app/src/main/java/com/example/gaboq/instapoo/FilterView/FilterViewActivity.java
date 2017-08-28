@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,29 +25,26 @@ public class FilterViewActivity extends AppCompatActivity {
     CustomGalleryAdapter customGalleryAdapter;
     ImageView selectedImageView;
 
-    int[] images = {R.drawable.flores, R.drawable.w_b, R.drawable.gaussiano,
-            R.drawable.sepia, R.drawable.negative};
+
+    int[] images = {R.drawable.flores,
+            R.drawable.w_b, R.drawable.w_b, R.drawable.w_b, R.drawable.w_b,
+            R.drawable.sepia, R.drawable.negative,
+            R.drawable.gaussiano};
 
     MainFactory mFactory = new MainFactory();
-
-    public Bitmap bitmap = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_view);
 
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
-        if(b != null) {
-            try {
-                bitmap = BitmapFactory.decodeStream(FilterViewActivity.this.openFileInput("myImage"));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+        final String imageString = getIntent().getStringExtra("img");
+
+
         simpleGallery = (Gallery) findViewById(R.id.simpleGallery);
         selectedImageView = (ImageView) findViewById(R.id.selectedImageView);
+        final Uri uri = Uri.parse(imageString);
+        selectedImageView.setImageURI(uri);
         customGalleryAdapter = new CustomGalleryAdapter(getApplicationContext(), images);
         simpleGallery.setAdapter(customGalleryAdapter);
         simpleGallery.setSpacing(10);
@@ -53,18 +52,13 @@ public class FilterViewActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Aqui sucede la magia
-                if (bitmap != null) {
-                    bitmap = Bitmap.createScaledBitmap(bitmap, 640, 480, true);
-                    IFilter f = mFactory.getInstance(bitmap, position + 1);
-                    f.applyFilter();
-                    bitmap = f.generateBitmap();
-                    Matrix matrix = new Matrix();
-                    matrix.setRotate(90);
-                    bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-                    selectedImageView.setImageBitmap(bitmap);
-                }
-
-
+                //Drawable d = getResources().getDrawable(images[position]);
+                //Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
+                Bitmap bitmap;
+                bitmap = BitmapFactory.decodeFile(imageString);
+                IFilter f = mFactory.getInstance(bitmap, position);
+                bitmap = f.generateBitmap();
+                selectedImageView.setImageBitmap(bitmap);
             }
         });
     }
