@@ -7,8 +7,10 @@ import android.graphics.Matrix;
 import android.icu.text.SimpleDateFormat;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,9 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.gaboq.instapoo.FilterView.FilterViewActivity;
-import com.example.gaboq.instapoo.MainFactory;
 import com.example.gaboq.instapoo.R;
-import com.example.gaboq.instapoo.filters.IFilter;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,6 +55,7 @@ public class CamActivity extends AppCompatActivity {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void takePhoto(View view) {
         Intent callCamera = new Intent();
         callCamera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -78,12 +79,11 @@ public class CamActivity extends AppCompatActivity {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private File createImageFile() throws IOException {
 
         String time = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        }
+        time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
         String imageFileName = "IMG" + time + "_";
         File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -118,12 +118,7 @@ public class CamActivity extends AppCompatActivity {
         Matrix matrix = new Matrix();
         matrix.setRotate(90);
         Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-        /*
-        MainFactory mFactory = new MainFactory();
-        IFilter f = mFactory.getInstance(rotatedBitmap, 6);
-        f.applyFilter();
-        rotatedBitmap = f.generateBitmap();
-        */
+        Bitmap.createScaledBitmap(reduceImage(), 800, 533, true);
         Intent intent = new Intent(this,FilterViewActivity.class).putExtra("img",mImageLocation);
         startActivity(intent);
         //mPhotoCapture.setImageBitmap(rotatedBitmap);

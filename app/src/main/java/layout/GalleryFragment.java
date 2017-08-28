@@ -48,13 +48,10 @@ public class GalleryFragment extends Fragment {
             gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getActivity(),
-                            FilterViewActivity.class).putExtra("img",list.get(position).toString());
+                    Intent intent = new Intent(getActivity(), FilterViewActivity.class).putExtra("img",list.get(position).toString());
                     startActivity(intent);
                 }
             });
-        }else{
-
         }
         return v;
     }

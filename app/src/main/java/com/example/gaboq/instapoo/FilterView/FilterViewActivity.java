@@ -2,6 +2,7 @@ package com.example.gaboq.instapoo.FilterView;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +25,7 @@ public class FilterViewActivity extends AppCompatActivity {
     int[] images = {R.drawable.flores,
             R.drawable.w_b, R.drawable.w_b, R.drawable.w_b, R.drawable.w_b,
             R.drawable.sepia, R.drawable.negative,
-            R.drawable.gaussiano}; //, R.drawable.margaritas};
+            R.drawable.gaussiano};
 
     MainFactory mFactory = new MainFactory();
 
@@ -47,11 +48,8 @@ public class FilterViewActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Aqui sucede la magia
-                //Drawable d = getResources().getDrawable(images[position]);
-                //Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
                 Bitmap bitmap;
                 bitmap = BitmapFactory.decodeFile(imageString);
-                //bitmap = Bitmap.createScaledBitmap(bitmap, , , true);
                 IFilter f = mFactory.getInstance(bitmap, position);
                 bitmap = f.generateBitmap();
                 selectedImageView.setImageBitmap(bitmap);
