@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.gaboq.instapoo.FilterView.FilterViewActivity;
 import com.example.gaboq.instapoo.R;
@@ -29,6 +30,7 @@ import static android.os.Environment.DIRECTORY_DCIM;
 public class GalleryFragment extends Fragment {
     GridView gv;
     ArrayList<File> list;
+    private OnFragmentInteractionListener mListener;
     public GalleryFragment() {
 
     }
@@ -99,4 +101,19 @@ public class GalleryFragment extends Fragment {
         return a;
     }
 
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            OnFragmentInteractionListener mListener = (OnFragmentInteractionListener) context;
+        } else {
+            Toast.makeText(context, "Gallery", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

@@ -1,12 +1,24 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.MainFragment">
+    tools:context="layout.GalleryFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home" />
 
-</FrameLayout>
+    <GridView
+        android:id="@+id/homeGridView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="7dp"
+        android:columnWidth="350dp"
+        android:horizontalSpacing="3dp"
+        android:numColumns="1"
+        android:paddingRight="5dp"
+        android:stretchMode="spacingWidthUniform"
+        android:verticalSpacing="9dp"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteY="5dp" />
+</android.support.constraint.ConstraintLayout>
