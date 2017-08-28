@@ -85,7 +85,7 @@ public class CamActivity extends AppCompatActivity {
         String time = null;
         time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
-        String imageFileName = "IMG" + time + "_";
+        String imageFileName = "IMG" + time;
         File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
         File imageFile = File.createTempFile(imageFileName, ".jpg", storageDirectory);

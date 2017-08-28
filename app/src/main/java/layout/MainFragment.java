@@ -61,9 +61,12 @@ public class MainFragment extends Fragment {
             //
             //
             //
-            list = imageReader(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM));
+            File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/com.example.gaboq.instapoo/files/Pictures");
+            if(!dir.exists())
+                dir.mkdirs();
+            list = imageReader(dir);
             //
-            //
+            //"/storage/emulated/0/Android/data/com.example.gaboq.instapoo/files/Pictures"
             //
             gv = (GridView) v.findViewById(R.id.homeGridView);
             gv.setAdapter(new GridAdapter());
