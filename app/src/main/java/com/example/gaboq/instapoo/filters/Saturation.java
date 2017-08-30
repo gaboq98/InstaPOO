@@ -25,16 +25,19 @@ public class Saturation extends Imagen {
             r = pixels[i].getR();
             g = pixels[i].getG();
             b = pixels[i].getB();
-            int c = min(r,g,b);
-            if (c > 90){
-                c = max(r,g,b);
-            }
-            pixels[i].setRGB(c,c,c);
-            //pixels[i].setRGB(checkValue(r+max(r,g,b)-min(r,g,b)),
-            //                          checkValue(g+max(r,g,b)-min(r,g,b)),
-            //                         checkValue(b+max(r,g,b)-min(r,g,b)));
+            pixels[i].setRGB(checkValue(r+max(r,g,b)-min(r,g,b)),
+                                      checkValue(g+max(r,g,b)-min(r,g,b)),
+                                      checkValue(b+max(r,g,b)-min(r,g,b)));
             aux[i] = pixels[i].getValue();
         }
     }
 
+    protected int checkValue(int val){
+        if (val>255){
+            val = 255;
+        }else if(val<0){
+            val=0;
+        }
+        return val;
+    }
 }

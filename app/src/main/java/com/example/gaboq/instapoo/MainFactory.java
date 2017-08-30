@@ -11,7 +11,6 @@ import com.example.gaboq.instapoo.filters.GaussianBlur;
 import com.example.gaboq.instapoo.filters.IFilter;
 import com.example.gaboq.instapoo.filters.Imagen;
 import com.example.gaboq.instapoo.filters.Negative;
-import com.example.gaboq.instapoo.filters.Saturation;
 import com.example.gaboq.instapoo.filters.Sepia;
 
 /**
@@ -27,7 +26,6 @@ public class MainFactory {
     final static int SEPIA_IMAGE = 5;    
     final static int NEGATIVE_IMAGE  = 6;
     final static int GAUSSIAN_BLUR = 7;
-    final static int SATURATION_IMAGE = 8;
 
     public IFilter getInstance(Bitmap bitmap, int opcion, Context context){
         switch (opcion){
@@ -47,8 +45,6 @@ public class MainFactory {
                 return new Negative(bitmap);
             case GAUSSIAN_BLUR:
                 return new GaussianBlur(bitmap,context);
-            case SATURATION_IMAGE:
-                return new Saturation(bitmap);
             default:
                 return new Imagen(bitmap);
         }
