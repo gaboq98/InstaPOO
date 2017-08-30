@@ -4,11 +4,15 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +22,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.gaboq.instapoo.Cam.CamActivity;
 import com.example.gaboq.instapoo.FilterView.FilterViewActivity;
 import com.example.gaboq.instapoo.R;
 
@@ -27,7 +32,7 @@ import java.util.ArrayList;
 import static android.os.Environment.DIRECTORY_DCIM;
 
 
-public class MainFragment extends Fragment {
+public class MainFragment extends GalleryFragment {
     GridView gv;
     ArrayList<File> list;
     private OnFragmentInteractionListener mListener;
@@ -61,9 +66,9 @@ public class MainFragment extends Fragment {
             //
             //
             //
-            File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/com.example.gaboq.instapoo/files/Pictures");
-            if(!dir.exists())
-                dir.mkdirs();
+            File dir = new File(String.valueOf(Environment.getExternalStorageDirectory().toString()
+                    + "//Android/data/com.example.gaboq.instapoo/files/Pictures/"));
+            //File dir = new File(String.valueOf(Environment.getExternalStorageDirectory().toString()));
             list = imageReader(dir);
             //
             //"/storage/emulated/0/Android/data/com.example.gaboq.instapoo/files/Pictures"
@@ -72,9 +77,10 @@ public class MainFragment extends Fragment {
             gv.setAdapter(new GridAdapter());
             gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                     Intent intent = new Intent(getActivity(), FilterViewActivity.class).putExtra("img",list.get(position).toString());
                     startActivity(intent);
+
                 }
             });
         }
@@ -102,27 +108,24 @@ public class MainFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = getActivity().getLayoutInflater().inflate(R.layout.photo_image, parent ,false);
             ImageView iv = (ImageView) convertView.findViewById(R.id.imageView);
-            iv.setImageURI(Uri.parse(getItem(position).toString()));
+            String dir = getItem(position).toString();
+            //Bitmap bitmap = BitmapFactory.decodeFile(dir);
+            int ivWidth = 330;
+            int ivHeigth = 330;
+            BitmapFactory.Options bitmapp = new BitmapFactory.Options();
+            bitmapp.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(dir, bitmapp);
+            int cameraImageWidth = bitmapp.outWidth;
+            int cameraImageHeight = bitmapp.outHeight;
+            bitmapp.inSampleSize = Math.min(cameraImageWidth/ivWidth, cameraImageHeight/ivHeigth);
+            bitmapp.inJustDecodeBounds = false;
+            Bitmap bitmap= BitmapFactory.decodeFile(dir, bitmapp);
+            iv.setImageBitmap(bitmap);
+            //iv.setImageURI(Uri.parse(getItem(position).toString()));
             return convertView;
         }
     }
 
-
-    ArrayList<File> imageReader(File root){
-        ArrayList<File> a = new ArrayList<>();
-        File[] files = root.listFiles();
-
-        for (int i = 0; i < files.length; i++) {
-            if(files[i].isDirectory()){
-                a.addAll(imageReader(files[i]));
-            }else{
-                if(files[i].getName().endsWith(".jpg")){
-                    a.add(files[i]);
-                }
-            }
-        }
-        return a;
-    }
 
 
     public interface OnFragmentInteractionListener {
@@ -139,4 +142,6 @@ public class MainFragment extends Fragment {
             Toast.makeText(context, "Home", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }

@@ -1,9 +1,7 @@
 package com.example.gaboq.instapoo.FilterView;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,7 +15,6 @@ import com.example.gaboq.instapoo.MainFactory;
 import com.example.gaboq.instapoo.R;
 import com.example.gaboq.instapoo.filters.IFilter;
 
-import java.io.FileNotFoundException;
 
 public class FilterViewActivity extends AppCompatActivity {
 
@@ -52,8 +49,6 @@ public class FilterViewActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Aqui sucede la magia
-                //Drawable d = getResources().getDrawable(images[position]);
-                //Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
                 Bitmap bitmap;
                 bitmap = BitmapFactory.decodeFile(imageString);
                 IFilter f = mFactory.getInstance(bitmap, position);

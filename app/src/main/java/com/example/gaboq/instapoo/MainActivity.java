@@ -2,9 +2,6 @@ package com.example.gaboq.instapoo;
 
 import android.Manifest;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -74,7 +71,7 @@ public class MainActivity extends AbsRuntimePermission {
 
     @Override
     public void onPermissionsGranted(int requestCode) {
-        Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_LONG).show();
     }
 
 
