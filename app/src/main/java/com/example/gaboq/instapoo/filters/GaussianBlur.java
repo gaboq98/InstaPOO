@@ -14,7 +14,7 @@ import android.support.v8.renderscript.ScriptIntrinsicBlur;
 public class GaussianBlur extends Imagen {
 
     private static float BITMAP_SCALE =0.4f;
-    private static float BLUR_RADIUS = 7.5f;
+    private static float BLUR_RADIUS = 7.4f;
     private Context context;
     private Bitmap bitmap;
 

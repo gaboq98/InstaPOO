@@ -29,7 +29,7 @@ public class FilterViewActivity extends AppCompatActivity {
     int[] images = {R.drawable.flores,
             R.drawable.w_b, R.drawable.w_b, R.drawable.w_b, R.drawable.w_b,
             R.drawable.sepia, R.drawable.negative,
-            R.drawable.gaussiano};
+            R.drawable.gaussiano,R.drawable.flores};
 
     MainFactory mFactory = new MainFactory();
 

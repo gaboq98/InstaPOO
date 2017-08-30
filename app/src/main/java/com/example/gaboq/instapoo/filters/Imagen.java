@@ -97,6 +97,16 @@ public class Imagen implements IFilter{
         }
     }
 
+
+    protected int checkValue(int val){
+        if (val>255){
+            val = 255;
+        }else if(val<0){
+            val=0;
+        }
+        return val;
+    }
+
     protected int max(int n1, int n2, int n3){
         int temp = 0;
         int[] array = {n1,n2,n3};

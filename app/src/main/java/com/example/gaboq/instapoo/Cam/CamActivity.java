@@ -130,107 +130,14 @@ public class CamActivity extends AppCompatActivity {
         String time = null;
         time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
-        String imageFileName = "IMG" + time;
-
-        File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-        File imageFile = File.createTempFile(imageFileName, ".jpg", storageDirectory);
-
-        galleryAddPic(imageFile);
-        mImageLocation = imageFile.getAbsolutePath();
-
-        return imageFile;
-    }
-
-
-    private Bitmap reduceImage() {
-
-        int imageViewWidth = 1080;        //mPhotoCapture.getWidth();
-        int imageViewHeigth = 1704;      //mPhotoCapture.getHeight();
-        BitmapFactory.Options bitmap = new BitmapFactory.Options();
-        bitmap.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(mImageLocation, bitmap);
-
-        int cameraImageWidth = bitmap.outWidth;
-        int cameraImageHeight = bitmap.outHeight;
+        String imageFht = bitmap.outHeight;
         bitmap.inSampleSize = Math.min(cameraImageWidth/imageViewWidth, cameraImageHeight/imageViewHeigth);
         bitmap.inJustDecodeBounds = false;
 
         return BitmapFactory.decodeFile(mImageLocation, bitmap);
-    }
-
-
-    private void rotateImage(Bitmap bitmap) {
-        Matrix matrix = new Matrix();
-        matrix.setRotate(90);
-        Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-        Bitmap.createScaledBitmap(reduceImage(), 800, 533, true);
-        mPhotoCapture.setImageBitmap(rotatedBitmap);
-        Intent intent = new Intent(this,FilterViewActivity.class).putExtra("img",mImageLocation);
-        startActivity(intent);
-
-    }
-
-
-    private void galleryAddPic(File f) {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
-        MediaScannerConnection.scanFile(this, new String[] { f.getPath() }, new String[] { "image/jpeg" }, null);
-
-    }
-
-
-    public void openEditPhoto(View view) {
-
-        Intent intent = new Intent(this, FilterViewActivity.class);
-        String str = createImageFromBitmap(mBitmap);
-        intent.putExtra("Bitmap", str);
-        startActivity(intent);
+ intent);
 
     }
 
 
     public String createImageFromBitmap(Bitmap bitmap) {
-        String fileName = "myImage";//no .png or .jpg needed
-        try {
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-            FileOutputStream fo = openFileOutput(fileName, Context.MODE_PRIVATE);
-            fo.write(bytes.toByteArray());
-            // remember close file output
-            fo.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            fileName = null;
-        }
-        return fileName;
-    }
-
-
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case SELECT_PHOTO_ACTION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
-        }
-    }
-
-}
