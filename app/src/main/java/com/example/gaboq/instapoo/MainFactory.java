@@ -1,11 +1,13 @@
 package com.example.gaboq.instapoo;
 
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import com.example.gaboq.instapoo.filters.Averaging;
 import com.example.gaboq.instapoo.filters.DecompositionMax;
 import com.example.gaboq.instapoo.filters.DecompositionMin;
 import com.example.gaboq.instapoo.filters.Desaturation;
+import com.example.gaboq.instapoo.filters.GaussianBlur;
 import com.example.gaboq.instapoo.filters.IFilter;
 import com.example.gaboq.instapoo.filters.Imagen;
 import com.example.gaboq.instapoo.filters.Negative;
@@ -25,7 +27,7 @@ public class MainFactory {
     final static int NEGATIVE_IMAGE  = 6;
     final static int GAUSSIAN_BLUR = 7;
 
-    public IFilter getInstance(Bitmap bitmap, int opcion){
+    public IFilter getInstance(Bitmap bitmap, int opcion, Context context){
         switch (opcion){
             case ORIGINAL_IMAGE:
                 return new Imagen(bitmap);
@@ -41,6 +43,8 @@ public class MainFactory {
                 return new Sepia(bitmap);
             case NEGATIVE_IMAGE:
                 return new Negative(bitmap);
+            case GAUSSIAN_BLUR:
+                return new GaussianBlur(bitmap,context);
             default:
                 return new Imagen(bitmap);
         }

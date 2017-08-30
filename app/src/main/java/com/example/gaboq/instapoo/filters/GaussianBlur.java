@@ -23,6 +23,7 @@ public class GaussianBlur extends Imagen {
         this.width = Math.round(bitmap.getWidth() * BITMAP_SCALE);
         this.height = Math.round(bitmap.getHeight() * BITMAP_SCALE);
         this.bitmap = bitmap;
+        this.context = context;
     }
 
     @Override
