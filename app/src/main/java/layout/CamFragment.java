@@ -1,5 +1,4 @@
-package com.example.gaboq.instapoo.Cam;
-
+package layout;
 
 import android.Manifest;
 import android.content.Intent;
@@ -11,30 +10,30 @@ import android.icu.text.SimpleDateFormat;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
-
-
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.gaboq.instapoo.FilterView.FilterViewActivity;
-
 import com.example.gaboq.instapoo.R;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import static android.app.Activity.RESULT_OK;
 
-public class CamActivity extends AppCompatActivity {
+
+public class CamFragment extends Fragment {
 
     private ImageView mPhotoCapture;
 
@@ -47,32 +46,37 @@ public class CamActivity extends AppCompatActivity {
     public static final int SELECT_PHOTO_ACTION = 0;
 
 
+    public CamFragment() {
+        // Required empty public constructor
+    }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        if (ContextCompat.checkSelfPermission(CamActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
-            if (ActivityCompat.shouldShowRequestPermissionRationale(CamActivity.this,
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                     Manifest.permission.CAMERA)) {
 
             } else {
 
-                ActivityCompat.requestPermissions(this,
+                ActivityCompat.requestPermissions(getActivity(),
                         new String[]{Manifest.permission.CAMERA},
                         SELECT_PHOTO_ACTION);
             }
         }
-
-        setContentView(R.layout.activity_cam);
-        mPhotoCapture = (ImageView) findViewById(R.id.photoCaptureImageView);
-        Button mButton = (Button) findViewById(R.id.button);
-        mButton.performClick();
+        View v = inflater.inflate(R.layout.activity_cam, container, false);
+        mPhotoCapture = (ImageView) v.findViewById(R.id.photoCaptureImageView);
+        takePhoto(v);
+        return v;
     }
 
 
-    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == START_CAMERA_APP && resultCode == RESULT_OK) {
             mBitmap = Bitmap.createScaledBitmap(reduceImage(), 800, 600, true);
@@ -87,7 +91,7 @@ public class CamActivity extends AppCompatActivity {
 
         Intent callCamera = new Intent();
         callCamera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (callCamera.resolveActivity(getPackageManager()) != null) {
+        if (callCamera.resolveActivity(getActivity().getPackageManager()) != null) {
             File photoFile;
             try {
                 photoFile = createImageFile();
@@ -115,7 +119,7 @@ public class CamActivity extends AppCompatActivity {
 
         String imageFileName = "IMG" + time;
 
-        File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDirectory = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
         File imageFile = File.createTempFile(imageFileName, ".jpg", storageDirectory);
 
@@ -151,7 +155,7 @@ public class CamActivity extends AppCompatActivity {
         rotatedBitmap = Bitmap.createScaledBitmap(reduceImage(), 640, 480, true);
 
         mPhotoCapture.setImageBitmap(rotatedBitmap);
-        Intent intent = new Intent(this,FilterViewActivity.class).putExtra("img",mImageLocation);
+        Intent intent = new Intent(getActivity(),FilterViewActivity.class).putExtra("img",mImageLocation);
         startActivity(intent);
 
     }
@@ -161,10 +165,15 @@ public class CamActivity extends AppCompatActivity {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
-        MediaScannerConnection.scanFile(this, new String[] { f.getPath() }, new String[] { "image/jpeg" }, null);
+        this.getActivity().sendBroadcast(mediaScanIntent);
+        MediaScannerConnection.scanFile(getActivity(), new String[] { f.getPath() }, new String[] { "image/jpeg" }, null);
 
     }
+
+
+
+
+
 
 
 }

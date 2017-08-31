@@ -7,12 +7,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +19,12 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.gaboq.instapoo.Cam.CamActivity;
 import com.example.gaboq.instapoo.FilterView.FilterViewActivity;
 import com.example.gaboq.instapoo.R;
 
 import java.io.File;
 import java.util.ArrayList;
 
-import static android.os.Environment.DIRECTORY_DCIM;
 
 
 public class MainFragment extends GalleryFragment {
@@ -37,7 +32,6 @@ public class MainFragment extends GalleryFragment {
     ArrayList<File> list;
     private OnFragmentInteractionListener mListener;
     public MainFragment() {
-        // Required empty public constructor
     }
 
 
@@ -63,16 +57,12 @@ public class MainFragment extends GalleryFragment {
 
         if(ContextCompat.checkSelfPermission(getActivity().getApplicationContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED ){
-            //
-            //
-            //
+
             File dir = new File(String.valueOf(Environment.getExternalStorageDirectory().toString()
                     + "//Android/data/com.example.gaboq.instapoo/files/Pictures/"));
-            //File dir = new File(String.valueOf(Environment.getExternalStorageDirectory().toString()));
+
             list = imageReader(dir);
-            //
-            //"/storage/emulated/0/Android/data/com.example.gaboq.instapoo/files/Pictures"
-            //
+
             gv = (GridView) v.findViewById(R.id.homeGridView);
             gv.setAdapter(new GridAdapter());
             gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
