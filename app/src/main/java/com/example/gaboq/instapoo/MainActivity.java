@@ -1,20 +1,15 @@
 package com.example.gaboq.instapoo;
 
 import android.Manifest;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.example.gaboq.instapoo.Cam.CamActivity;
 
+import layout.CamFragment;
 import layout.GalleryFragment;
 import layout.MainFragment;
 
@@ -22,7 +17,6 @@ import layout.MainFragment;
 public class MainActivity extends AbsRuntimePermission {
 
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
-
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -42,8 +36,7 @@ public class MainActivity extends AbsRuntimePermission {
                     return true;
 
                 case R.id.navigation_cam:
-                    Intent intent = new Intent(MainActivity.this, CamActivity.class);
-                    startActivity(intent);
+                    transaction.replace(R.id.content, new CamFragment()).commit();
                     return true;
             }
             return false;
@@ -74,7 +67,7 @@ public class MainActivity extends AbsRuntimePermission {
 
     @Override
     public void onPermissionsGranted(int requestCode) {
-        Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_LONG).show();
     }
 
 

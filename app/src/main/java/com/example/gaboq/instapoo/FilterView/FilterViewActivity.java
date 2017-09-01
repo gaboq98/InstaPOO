@@ -3,10 +3,16 @@ package com.example.gaboq.instapoo.FilterView;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 
+import android.graphics.drawable.BitmapDrawable;
+import android.icu.text.SimpleDateFormat;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +23,11 @@ import com.example.gaboq.instapoo.MainFactory;
 import com.example.gaboq.instapoo.R;
 import com.example.gaboq.instapoo.filters.IFilter;
 
-import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+
 
 public class FilterViewActivity extends AppCompatActivity {
 
@@ -52,8 +62,6 @@ public class FilterViewActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Aqui sucede la magia
-                //Drawable d = getResources().getDrawable(images[position]);
-                //Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
                 Bitmap bitmap;
                 bitmap = BitmapFactory.decodeFile(imageString);
                 IFilter f = mFactory.getInstance(bitmap, position, getApplicationContext());
@@ -62,5 +70,39 @@ public class FilterViewActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void saveImageFile(View view) throws IOException {
+
+        String time = null;
+        time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "IMG" + time;
+        File storageDirectory = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imageFile = File.createTempFile(imageFileName, ".jpg", storageDirectory);
+        galleryAddPic(imageFile);
+        Bitmap bitmap = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
+        try {
+            FileOutputStream out = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finish();
+
+    }
+
+    private void galleryAddPic(File f) {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
+        MediaScannerConnection.scanFile(this, new String[] { f.getPath() }, new String[] { "image/jpeg" }, null);
+
+    }
+
 
 }

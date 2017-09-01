@@ -49,16 +49,6 @@ public class CustomGalleryAdapter extends BaseAdapter {
 
         ImageView imageView = new ImageView(context);
         imageView.setImageResource(images[position]); // set image in ImageView
-        //////
-        //Drawable d = imageView.getResources().getDrawable(images[position]);
-        //Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
-        //bitmap = Bitmap.createScaledBitmap(bitmap, 800, 533, true);
-        //MainFactory mFactory = new MainFactory();
-        //IFilter f = mFactory.getInstance(bitmap, position);
-        //f.applyFilter();
-        //bitmap = f.generateBitmap();
-        //imageView.setImageBitmap(bitmap);
-        //////
         imageView.setLayoutParams(new Gallery.LayoutParams(200, 200)); // set ImageView param
         return imageView;
     }

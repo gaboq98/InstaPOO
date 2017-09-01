@@ -57,14 +57,7 @@ public class Imagen implements IFilter{
     public Bitmap generatePreview(Bitmap bitmap, Canvas canvas) {
         return Bitmap.createScaledBitmap(bitmap,canvas.getWidth(),canvas.getHeight(),false);
     }
-    
-    
-    /*
-        //function to Filter Class //
-    public Bitmap generateBitmap(int[] aux, int width, int height){
-        return Bitmap.createBitmap(aux,width,height,RGB_565);
-    }
-    */
+
 
     protected class Pixel{
         int a;
@@ -119,8 +112,6 @@ public class Imagen implements IFilter{
         return temp;
     }
 
-
-
     public int getWidth() {
         return width;
     }
@@ -128,5 +119,12 @@ public class Imagen implements IFilter{
     public int getHeight() {
         return height;
     }
+
+
+
+
+
+
+
 
 }
