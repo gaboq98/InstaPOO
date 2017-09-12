@@ -32,7 +32,7 @@ import static android.os.Environment.DIRECTORY_DCIM;
 public class GalleryFragment extends Fragment {
     GridView gv;
     ArrayList<File> list;
-    private OnFragmentInteractionListener mListener;
+    protected OnFragmentInteractionListener mListener;
     public GalleryFragment() {
 
     }
@@ -50,7 +50,7 @@ public class GalleryFragment extends Fragment {
             list = imageReader(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM));
 
             gv = (GridView) v.findViewById(R.id.gridView);
-            gv.setAdapter(new GridAdapter());
+            gv.setAdapter(new GalleryGridAdapter());
             gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -62,22 +62,7 @@ public class GalleryFragment extends Fragment {
         return v;
     }
 
-    private class GridAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return list.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return list.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
+    private class GalleryGridAdapter extends AbsGridAdapter {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
