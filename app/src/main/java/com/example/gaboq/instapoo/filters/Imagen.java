@@ -29,6 +29,7 @@ public class Imagen implements IFilter{
         bitmap.getPixels(aux, 0, this.width, 0, 0, this.width, this.height);
         this.length = this.height*this.width;
         fillpixels();
+        applyFilter();
     }
 
     protected void fillpixels(){
