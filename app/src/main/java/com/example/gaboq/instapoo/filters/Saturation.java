@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 public class Saturation extends Imagen {
     public Saturation(Bitmap bitmap){
         super(bitmap);
+        applyFilter();
     }
 
     @Override

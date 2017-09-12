@@ -27,8 +27,26 @@ import java.util.ArrayList;
 
 
 
-public class MainFragment extends GalleryFragment {;
+public class MainFragment extends GalleryFragment {
+    GridView gv;
+    ArrayList<File> list;
     public MainFragment() {
+    }
+
+
+    public static MainFragment newInstance(String param1, String param2) {
+        MainFragment fragment = new MainFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+
+        }
     }
 
     @Override
@@ -45,8 +63,7 @@ public class MainFragment extends GalleryFragment {;
             list = imageReader(dir);
 
             gv = (GridView) v.findViewById(R.id.homeGridView);
-
-            gv.setAdapter(new MainGridAdapter());
+            gv.setAdapter(new GridAdapterFragment());
             gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -59,8 +76,23 @@ public class MainFragment extends GalleryFragment {;
         return v;
     }
 
+    class GridAdapterFragment extends BaseAdapter {
 
-    class MainGridAdapter extends AbsGridAdapter {
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = getActivity().getLayoutInflater().inflate(R.layout.photo_image, parent ,false);
@@ -71,42 +103,19 @@ public class MainFragment extends GalleryFragment {;
             int ivHeigth = 330;
             BitmapFactory.Options bitmapp = new BitmapFactory.Options();
             bitmapp.inJustDecodeBounds = true;
-            BitmapFactory.decodeFile(dir, bitmapp); //
+            BitmapFactory.decodeFile(dir, bitmapp);
             int cameraImageWidth = bitmapp.outWidth;
             int cameraImageHeight = bitmapp.outHeight;
             bitmapp.inSampleSize = Math.min(cameraImageWidth/ivWidth, cameraImageHeight/ivHeigth);
             bitmapp.inJustDecodeBounds = false;
             Bitmap bitmap= BitmapFactory.decodeFile(dir, bitmapp);
-
-            bitmap = resize(bitmap, 720, 720);
-
+            bitmap = Bitmap.createScaledBitmap(bitmap, 330, 330, false);
             iv.setImageBitmap(bitmap);
 
             return convertView;
         }
     }
 
-
-    public static Bitmap resize(Bitmap image, int maxWidth, int maxHeight) {
-        if (maxHeight > 0 && maxWidth > 0) {
-            int width = image.getWidth();
-            int height = image.getHeight();
-            float ratioBitmap = (float) width / (float) height;
-            float ratioMax = (float) maxWidth / (float) maxHeight;
-
-            int finalWidth = maxWidth;
-            int finalHeight = maxHeight;
-            if (ratioMax > 1) {
-                finalWidth = (int) ((float)maxHeight * ratioBitmap);
-            } else {
-                finalHeight = (int) ((float)maxWidth / ratioBitmap);
-            }
-            image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
-            return image;
-        } else {
-            return image;
-        }
-    }
 
     @Override
     public void onAttach(Context context) {

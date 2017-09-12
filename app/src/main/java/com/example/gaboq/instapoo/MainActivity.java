@@ -43,7 +43,8 @@ public class MainActivity extends AbsRuntimePermission {
         }
 
     };
-    
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +67,8 @@ public class MainActivity extends AbsRuntimePermission {
 
     @Override
     public void onPermissionsGranted(int requestCode) {
-
+        //Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_LONG).show();
     }
+
+
 }

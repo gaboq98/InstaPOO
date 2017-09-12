@@ -10,6 +10,7 @@ public class DecompositionMin extends Imagen {
 
     public DecompositionMin(Bitmap bitmap){
         super(bitmap);
+        applyFilter();
     }
 
     @Override

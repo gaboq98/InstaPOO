@@ -10,6 +10,7 @@ public class DecompositionMax extends Imagen {
 
     public DecompositionMax(Bitmap bitmap){
         super(bitmap);
+        applyFilter();
     }
 
 

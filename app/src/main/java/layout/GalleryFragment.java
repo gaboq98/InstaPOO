@@ -29,15 +29,13 @@ import java.io.File;
 import java.util.ArrayList;
 
 import static android.os.Environment.DIRECTORY_DCIM;
-import static layout.MainFragment.resize;
 
 
 public class GalleryFragment extends Fragment {
     GridView gv;
     ArrayList<File> list;
-    protected OnFragmentInteractionListener mListener;
-    public GalleryFragment() {
 
+    public GalleryFragment() {
     }
 
     @Override
@@ -53,7 +51,7 @@ public class GalleryFragment extends Fragment {
             list = imageReader(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM));
 
             gv = (GridView) v.findViewById(R.id.gridView);
-            gv.setAdapter(new GalleryGridAdapter());
+            gv.setAdapter(new GridAdapter());
             gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -65,8 +63,22 @@ public class GalleryFragment extends Fragment {
         return v;
     }
 
+    protected class GridAdapter extends BaseAdapter {
 
-    private class GalleryGridAdapter extends AbsGridAdapter {
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -84,7 +96,6 @@ public class GalleryFragment extends Fragment {
             bitmapp.inSampleSize = Math.min(cameraImageWidth/ivWidth, cameraImageHeight/ivHeigth);
             bitmapp.inJustDecodeBounds = false;
             Bitmap bitmap= BitmapFactory.decodeFile(dir, bitmapp);
-            bitmap = resize(bitmap, 720, 720);
             iv.setImageBitmap(bitmap);
 
 
@@ -110,18 +121,11 @@ public class GalleryFragment extends Fragment {
     }
 
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
-
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            OnFragmentInteractionListener mListener = (OnFragmentInteractionListener) context;
-        } else {
-            Toast.makeText(context, "Gallery", Toast.LENGTH_SHORT).show();
-        }
+        Toast.makeText(context, "Gallery", Toast.LENGTH_SHORT).show();
+
     }
 }

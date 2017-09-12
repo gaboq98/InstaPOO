@@ -10,6 +10,7 @@ public class Sepia extends Imagen {
 
     public Sepia(Bitmap bitmap){
         super(bitmap);
+        applyFilter();
     }
 
     @Override

@@ -11,6 +11,7 @@ public class Averaging extends Imagen {
 
     public Averaging(Bitmap bitmap){
         super(bitmap);
+        applyFilter();
     }
 
     @Override

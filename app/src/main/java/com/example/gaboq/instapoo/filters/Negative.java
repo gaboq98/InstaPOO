@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 public class Negative extends Imagen {
     public Negative(Bitmap bitmap){
         super(bitmap);
+        applyFilter();
     }
 
     @Override

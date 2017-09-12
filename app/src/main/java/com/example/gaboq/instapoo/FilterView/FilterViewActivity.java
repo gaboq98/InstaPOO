@@ -29,8 +29,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 
-import static layout.MainFragment.resize;
-
 
 public class FilterViewActivity extends AppCompatActivity {
 
@@ -38,7 +36,6 @@ public class FilterViewActivity extends AppCompatActivity {
     CustomGalleryAdapter customGalleryAdapter;
     ImageView selectedImageView;
 
-    int pos;
 
     int[] images = {R.drawable.flores,
             R.drawable.w_b, R.drawable.w_b, R.drawable.w_b, R.drawable.w_b,
@@ -67,9 +64,7 @@ public class FilterViewActivity extends AppCompatActivity {
                 //Aqui sucede la magia
                 Bitmap bitmap;
                 bitmap = BitmapFactory.decodeFile(imageString);
-                bitmap = resize(bitmap, 1080, 1080);
                 IFilter f = mFactory.getInstance(bitmap, position, getApplicationContext());
-                pos = position;
                 bitmap = f.generateBitmap();
                 selectedImageView.setImageBitmap(bitmap);
             }
@@ -86,9 +81,7 @@ public class FilterViewActivity extends AppCompatActivity {
         File storageDirectory = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File imageFile = File.createTempFile(imageFileName, ".jpg", storageDirectory);
         galleryAddPic(imageFile);
-
         Bitmap bitmap = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
-
         try {
             FileOutputStream out = new FileOutputStream(imageFile);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);

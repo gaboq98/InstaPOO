@@ -11,6 +11,7 @@ public class Desaturation extends Imagen {
 
     public Desaturation(Bitmap bitmap){
         super(bitmap);
+        applyFilter();
     }
 
     @Override
