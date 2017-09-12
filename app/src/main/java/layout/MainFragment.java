@@ -118,6 +118,7 @@ public class MainFragment extends GalleryFragment {
         }
     }
 
+
     public static Bitmap resize(Bitmap image, int maxWidth, int maxHeight) {
         if (maxHeight > 0 && maxWidth > 0) {
             int width = image.getWidth();

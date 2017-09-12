@@ -41,7 +41,7 @@ public class FilterViewActivity extends AppCompatActivity {
     int[] images = {R.drawable.flores,
             R.drawable.w_b, R.drawable.w_b, R.drawable.w_b, R.drawable.w_b,
             R.drawable.sepia, R.drawable.negative,
-            R.drawable.gaussiano};
+            R.drawable.gaussiano,R.drawable.w_b};
 
     MainFactory mFactory = new MainFactory();
 
@@ -62,10 +62,9 @@ public class FilterViewActivity extends AppCompatActivity {
         simpleGallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Aqui sucede la magia
                 Bitmap bitmap;
                 bitmap = BitmapFactory.decodeFile(imageString);
-                bitmap = resize(bitmap, 1080, 1080);
+                //bitmap = resize(bitmap, 1080, 1080);
                 IFilter f = mFactory.getInstance(bitmap, position, getApplicationContext());
                 bitmap = f.generateBitmap();
                 selectedImageView.setImageBitmap(bitmap);

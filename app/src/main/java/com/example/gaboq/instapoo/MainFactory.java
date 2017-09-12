@@ -3,6 +3,8 @@ package com.example.gaboq.instapoo;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import com.example.gaboq.instapoo.filters.Ascii;
 import com.example.gaboq.instapoo.filters.Averaging;
 import com.example.gaboq.instapoo.filters.DecompositionMax;
 import com.example.gaboq.instapoo.filters.DecompositionMin;
@@ -18,33 +20,27 @@ import com.example.gaboq.instapoo.filters.Sepia;
  */
 
 public class MainFactory {
-    final static int ORIGINAL_IMAGE = 0;
-    final static int AVERAGING_IMAGE = 1;
-    final static int DESATURATION_IMAGE = 2;
-    final static int DECOMPOSITION_MIN_IMAGE = 3;
-    final static int DECOMPOSITION_MAX_IMAGE = 4;
-    final static int SEPIA_IMAGE = 5;    
-    final static int NEGATIVE_IMAGE  = 6;
-    final static int GAUSSIAN_BLUR = 7;
 
     public IFilter getInstance(Bitmap bitmap, int opcion, Context context){
         switch (opcion){
-            case ORIGINAL_IMAGE:
+            case 0:
                 return new Imagen(bitmap);
-            case AVERAGING_IMAGE:
+            case 1:
                 return new Averaging(bitmap);
-            case DESATURATION_IMAGE:
+            case 2:
                 return new Desaturation(bitmap);
-            case DECOMPOSITION_MIN_IMAGE:
+            case 3:
                 return new DecompositionMin(bitmap);
-            case DECOMPOSITION_MAX_IMAGE:
+            case 4:
                 return new DecompositionMax(bitmap);
-            case SEPIA_IMAGE:
+            case 5:
                 return new Sepia(bitmap);
-            case NEGATIVE_IMAGE:
+            case 6:
                 return new Negative(bitmap);
-            case GAUSSIAN_BLUR:
+            case 7:
                 return new GaussianBlur(bitmap,context);
+            case 8:
+                return new Ascii(bitmap);
             default:
                 return new Imagen(bitmap);
         }
