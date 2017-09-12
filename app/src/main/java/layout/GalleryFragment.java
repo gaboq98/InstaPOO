@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -27,6 +29,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import static android.os.Environment.DIRECTORY_DCIM;
+import static layout.MainFragment.resize;
 
 
 public class GalleryFragment extends Fragment {
@@ -62,7 +65,7 @@ public class GalleryFragment extends Fragment {
         return v;
     }
 
-    private class GridAdapter extends BaseAdapter {
+    protected class GridAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -83,7 +86,22 @@ public class GalleryFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = getActivity().getLayoutInflater().inflate(R.layout.single_grid, parent ,false);
             ImageView iv = (ImageView) convertView.findViewById(R.id.imageView2);
-            iv.setImageURI(Uri.parse(getItem(position).toString()));
+            String dir = getItem(position).toString();
+
+            int ivWidth = 190;
+            int ivHeigth = 179;
+            BitmapFactory.Options bitmapp = new BitmapFactory.Options();
+            bitmapp.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(dir, bitmapp);
+            int cameraImageWidth = bitmapp.outWidth;
+            int cameraImageHeight = bitmapp.outHeight;
+            bitmapp.inSampleSize = Math.min(cameraImageWidth/ivWidth, cameraImageHeight/ivHeigth);
+            bitmapp.inJustDecodeBounds = false;
+            Bitmap bitmap= BitmapFactory.decodeFile(dir, bitmapp);
+            bitmap = resize(bitmap, 720, 720);
+            iv.setImageBitmap(bitmap);
+
+
             return convertView;
         }
     }

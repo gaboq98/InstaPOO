@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.gaboq.instapoo.FilterView.FilterViewActivity;
 import com.example.gaboq.instapoo.R;
@@ -71,6 +72,7 @@ public class CamFragment extends Fragment {
         View v = inflater.inflate(R.layout.activity_cam, container, false);
         mPhotoCapture = (ImageView) v.findViewById(R.id.photoCaptureImageView);
         takePhoto(v);
+        Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         return v;
     }
 
@@ -108,8 +110,6 @@ public class CamFragment extends Fragment {
             }
         }
     }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private File createImageFile() throws IOException {

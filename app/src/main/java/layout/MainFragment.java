@@ -64,7 +64,7 @@ public class MainFragment extends GalleryFragment {
             list = imageReader(dir);
 
             gv = (GridView) v.findViewById(R.id.homeGridView);
-            gv.setAdapter(new GridAdapter());
+            gv.setAdapter(new GridAdapterFragment());
             gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -77,7 +77,7 @@ public class MainFragment extends GalleryFragment {
         return v;
     }
 
-    class GridAdapter extends BaseAdapter {
+    class GridAdapterFragment extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -99,38 +99,52 @@ public class MainFragment extends GalleryFragment {
             convertView = getActivity().getLayoutInflater().inflate(R.layout.photo_image, parent ,false);
             ImageView iv = (ImageView) convertView.findViewById(R.id.imageView);
             String dir = getItem(position).toString();
-            //Bitmap bitmap = BitmapFactory.decodeFile(dir);
+
             int ivWidth = 330;
             int ivHeigth = 330;
             BitmapFactory.Options bitmapp = new BitmapFactory.Options();
             bitmapp.inJustDecodeBounds = true;
-            BitmapFactory.decodeFile(dir, bitmapp);
+            BitmapFactory.decodeFile(dir, bitmapp); //
             int cameraImageWidth = bitmapp.outWidth;
             int cameraImageHeight = bitmapp.outHeight;
             bitmapp.inSampleSize = Math.min(cameraImageWidth/ivWidth, cameraImageHeight/ivHeigth);
             bitmapp.inJustDecodeBounds = false;
             Bitmap bitmap= BitmapFactory.decodeFile(dir, bitmapp);
+
+            bitmap = resize(bitmap, 720, 720);
+
             iv.setImageBitmap(bitmap);
-            //iv.setImageURI(Uri.parse(getItem(position).toString()));
+
             return convertView;
         }
     }
 
+    public static Bitmap resize(Bitmap image, int maxWidth, int maxHeight) {
+        if (maxHeight > 0 && maxWidth > 0) {
+            int width = image.getWidth();
+            int height = image.getHeight();
+            float ratioBitmap = (float) width / (float) height;
+            float ratioMax = (float) maxWidth / (float) maxHeight;
 
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+            int finalWidth = maxWidth;
+            int finalHeight = maxHeight;
+            if (ratioMax > 1) {
+                finalWidth = (int) ((float)maxHeight * ratioBitmap);
+            } else {
+                finalHeight = (int) ((float)maxWidth / ratioBitmap);
+            }
+            image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
+            return image;
+        } else {
+            return image;
+        }
     }
-
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            OnFragmentInteractionListener mListener = (OnFragmentInteractionListener) context;
-        } else {
-            Toast.makeText(context, "Home", Toast.LENGTH_SHORT).show();
-        }
+        Toast.makeText(context, "Home", Toast.LENGTH_SHORT).show();
+
     }
 
 
