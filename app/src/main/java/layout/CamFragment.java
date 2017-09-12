@@ -72,7 +72,6 @@ public class CamFragment extends Fragment {
         View v = inflater.inflate(R.layout.activity_cam, container, false);
         mPhotoCapture = (ImageView) v.findViewById(R.id.photoCaptureImageView);
         takePhoto(v);
-        Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         return v;
     }
 

@@ -125,7 +125,7 @@ public class GalleryFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Toast.makeText(context, "Gallery", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "Gallery", Toast.LENGTH_SHORT).show();
 
     }
 }

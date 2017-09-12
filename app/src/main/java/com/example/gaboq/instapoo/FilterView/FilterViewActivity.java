@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static layout.MainFragment.resize;
+
 
 public class FilterViewActivity extends AppCompatActivity {
 
@@ -63,6 +65,7 @@ public class FilterViewActivity extends AppCompatActivity {
                 //Aqui sucede la magia
                 Bitmap bitmap;
                 bitmap = BitmapFactory.decodeFile(imageString);
+                bitmap = resize(bitmap, 1080, 1080);
                 IFilter f = mFactory.getInstance(bitmap, position, getApplicationContext());
                 bitmap = f.generateBitmap();
                 selectedImageView.setImageBitmap(bitmap);

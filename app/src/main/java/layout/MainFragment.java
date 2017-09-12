@@ -109,18 +109,39 @@ public class MainFragment extends GalleryFragment {
             bitmapp.inSampleSize = Math.min(cameraImageWidth/ivWidth, cameraImageHeight/ivHeigth);
             bitmapp.inJustDecodeBounds = false;
             Bitmap bitmap= BitmapFactory.decodeFile(dir, bitmapp);
-            bitmap = Bitmap.createScaledBitmap(bitmap, 330, 330, false);
+
+            bitmap = resize(bitmap, 1080, 1080);
+
             iv.setImageBitmap(bitmap);
 
             return convertView;
         }
     }
 
+    public static Bitmap resize(Bitmap image, int maxWidth, int maxHeight) {
+        if (maxHeight > 0 && maxWidth > 0) {
+            int width = image.getWidth();
+            int height = image.getHeight();
+            float ratioBitmap = (float) width / (float) height;
+            float ratioMax = (float) maxWidth / (float) maxHeight;
+
+            int finalWidth = maxWidth;
+            int finalHeight = maxHeight;
+            if (ratioMax > 1) {
+                finalWidth = (int) ((float)maxHeight * ratioBitmap);
+            } else {
+                finalHeight = (int) ((float)maxWidth / ratioBitmap);
+            }
+            image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
+            return image;
+        } else {
+            return image;
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Toast.makeText(context, "Home", Toast.LENGTH_SHORT).show();
 
     }
 
