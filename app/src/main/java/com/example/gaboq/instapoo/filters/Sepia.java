@@ -12,7 +12,7 @@ public class Sepia extends Imagen {
         super(bitmap);
         applyFilter();
     }
-
+    
     @Override
     public void applyFilter() {
         for (int i = 0; i <this.length; i++) {
