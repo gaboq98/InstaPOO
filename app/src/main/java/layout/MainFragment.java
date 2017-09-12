@@ -27,27 +27,8 @@ import java.util.ArrayList;
 
 
 
-public class MainFragment extends GalleryFragment {
-    GridView gv;
-    ArrayList<File> list;
-    private OnFragmentInteractionListener mListener;
+public class MainFragment extends GalleryFragment {;
     public MainFragment() {
-    }
-
-
-    public static MainFragment newInstance(String param1, String param2) {
-        MainFragment fragment = new MainFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
     }
 
     @Override
@@ -64,7 +45,8 @@ public class MainFragment extends GalleryFragment {
             list = imageReader(dir);
 
             gv = (GridView) v.findViewById(R.id.homeGridView);
-            gv.setAdapter(new GridAdapterFragment());
+
+            gv.setAdapter(new MainGridAdapter());
             gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -77,23 +59,8 @@ public class MainFragment extends GalleryFragment {
         return v;
     }
 
-    class GridAdapterFragment extends BaseAdapter {
 
-        @Override
-        public int getCount() {
-            return list.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return list.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
+    class MainGridAdapter extends AbsGridAdapter {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = getActivity().getLayoutInflater().inflate(R.layout.photo_image, parent ,false);
@@ -118,6 +85,7 @@ public class MainFragment extends GalleryFragment {
             return convertView;
         }
     }
+
 
     public static Bitmap resize(Bitmap image, int maxWidth, int maxHeight) {
         if (maxHeight > 0 && maxWidth > 0) {
