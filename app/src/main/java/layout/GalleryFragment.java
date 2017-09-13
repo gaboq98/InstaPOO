@@ -97,6 +97,7 @@ public class GalleryFragment extends Fragment {
             bitmapp.inSampleSize = Math.min(cameraImageWidth/ivWidth, cameraImageHeight/ivHeigth);
             bitmapp.inJustDecodeBounds = false;
             Bitmap bitmap= BitmapFactory.decodeFile(dir, bitmapp);
+            bitmap = resize(bitmap, 360, 360);
             iv.setImageBitmap(bitmap);
 
 

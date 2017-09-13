@@ -34,7 +34,7 @@ public class Ascii extends Imagen {
     private Context context;
 
     public Ascii(Bitmap bitmap, Context context){
-        super(resize(bitmap, 255, 255));
+        super(resize(bitmap, 720, 720));
         this.context = context;
         byteArray = new char[(int) length];
         applyFilter();
@@ -43,7 +43,7 @@ public class Ascii extends Imagen {
     @Override
     public void applyFilter(){
         for (int i = 0; i < length ; i++) {
-            byteArray[i] = toAscii(Color.red(aux[i]));
+            byteArray[i] = toAscii(Color.blue(aux[i]));
 
         }
         asciistr = new String(byteArray);
@@ -60,38 +60,21 @@ public class Ascii extends Imagen {
         //textPaint.density = -10;
         textPaint.setAntiAlias(true);
         textPaint.setTypeface(Typeface.MONOSPACE);
-        textPaint.setTextSize(1);
-        StaticLayout sl= new StaticLayout(asciistr, textPaint, width, Layout.Alignment.ALIGN_CENTER, 1.0f , 0.0f, false);
+        textPaint.setTextSize(2);
+        StaticLayout sl= new StaticLayout(asciistr, textPaint, width*2, Layout.Alignment.ALIGN_CENTER, 1.0f , 0.0f, false);
         c.translate(0,0);
         sl.draw(c);
-        saveText();
+
         return b;
     }
 
-
-    private void saveText() {
-
-        String time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String filename = "ASCII" + time;
-        File file = new File("/data/user/0/com.example.gaboq.instapoo/files/Ascii/", filename + ".txt");
-
-        FileOutputStream outputStream;
-
-        try {
-            outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write(asciistr.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private char toAscii(double g)
     {
         final char str;
 
         if (g >= 230.0) {
-            str = ' ';
+            str = 'h';
         } else if (g >= 200.0) {
             str = '.';
         } else if (g >= 180.0) {
@@ -103,7 +86,7 @@ public class Ascii extends Imagen {
         } else if (g >= 100.0) {
             str = '&';
         } else if (g >= 70.0) {
-            str = '8';
+            str = '#';
         } else if (g >= 50.0) {
             str = '#';
         } else {
