@@ -34,7 +34,7 @@ public class Ascii extends Imagen {
     private Context context;
 
     public Ascii(Bitmap bitmap, Context context){
-        super(resize(bitmap, 255, 255));
+        super(resize(bitmap, 500, 500));
         this.context = context;
         byteArray = new char[(int) length];
         applyFilter();
@@ -43,15 +43,14 @@ public class Ascii extends Imagen {
     @Override
     public void applyFilter(){
         for (int i = 0; i < length ; i++) {
-            byteArray[i] = toAscii(Color.red(aux[i]));
-
+            byteArray[i] =toAscii(Color.blue(aux[i]));
         }
         asciistr = new String(byteArray);
     }
 
     @Override
     public Bitmap generateBitmap() {
-        Bitmap b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Bitmap b = Bitmap.createBitmap(width*2, height*2+250, Bitmap.Config.ARGB_8888);
 
         Canvas c = new Canvas(b);
         c.drawARGB(0, Color.WHITE,Color.WHITE,Color.WHITE);
@@ -60,9 +59,9 @@ public class Ascii extends Imagen {
         //textPaint.density = -10;
         textPaint.setAntiAlias(true);
         textPaint.setTypeface(Typeface.MONOSPACE);
-        textPaint.setTextSize(1);
-        StaticLayout sl= new StaticLayout(asciistr, textPaint, width, Layout.Alignment.ALIGN_CENTER, 1.0f , 0.0f, false);
-        c.translate(0,0);
+        textPaint.setTextSize(4);
+        //textPaint.setTextScaleX(4);
+        StaticLayout sl= new StaticLayout(asciistr, textPaint,width*4, Layout.Alignment.ALIGN_CENTER, 1.0f , 0.0f, false);
         sl.draw(c);
         saveText();
         return b;
@@ -91,7 +90,7 @@ public class Ascii extends Imagen {
         final char str;
 
         if (g >= 230.0) {
-            str = ' ';
+            str = 'h';
         } else if (g >= 200.0) {
             str = '.';
         } else if (g >= 180.0) {
@@ -103,7 +102,7 @@ public class Ascii extends Imagen {
         } else if (g >= 100.0) {
             str = '&';
         } else if (g >= 70.0) {
-            str = '8';
+            str = 'K';
         } else if (g >= 50.0) {
             str = '#';
         } else {
