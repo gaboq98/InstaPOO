@@ -19,6 +19,7 @@
         android:layout_height="43dp"
         android:layout_gravity="right"
         android:onClick="saveImageFile"
+        android:paddingBottom="8dp"
         app:srcCompat="@drawable/ic_check" />
 
     <ImageView

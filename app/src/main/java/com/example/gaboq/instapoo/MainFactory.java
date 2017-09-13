@@ -40,7 +40,7 @@ public class MainFactory {
             case 7:
                 return new GaussianBlur(bitmap,context);
             case 8:
-                return new Ascii(bitmap);
+                return new Ascii(bitmap, context);
             default:
                 return new Imagen(bitmap);
         }

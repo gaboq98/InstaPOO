@@ -81,7 +81,7 @@ public class CamFragment extends Fragment {
 
         if (requestCode == START_CAMERA_APP && resultCode == RESULT_OK) {
             mBitmap = Bitmap.createScaledBitmap(reduceImage(), 800, 600, true);
-            rotateImage(mBitmap);
+            rotateImage(mBitmap, mPhotoCapture);
 
         }
     }
@@ -146,14 +146,14 @@ public class CamFragment extends Fragment {
     }
 
 
-    private void rotateImage(Bitmap bitmap) {
+    private void rotateImage(Bitmap bitmap, ImageView imageView) {
         Matrix matrix = new Matrix();
-        matrix.setRotate(90);
+        matrix.setRotate(0);
         Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
         rotatedBitmap = Bitmap.createScaledBitmap(reduceImage(), 640, 480, true);
 
-        mPhotoCapture.setImageBitmap(rotatedBitmap);
+        imageView.setImageBitmap(rotatedBitmap);
         Intent intent = new Intent(getActivity(),FilterViewActivity.class).putExtra("img",mImageLocation);
         startActivity(intent);
 

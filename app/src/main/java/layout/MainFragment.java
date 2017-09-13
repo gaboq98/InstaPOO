@@ -1,12 +1,10 @@
 package layout;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.content.ContextCompat;
@@ -17,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.gaboq.instapoo.FilterView.FilterViewActivity;
 import com.example.gaboq.instapoo.R;
@@ -26,13 +23,13 @@ import java.io.File;
 import java.util.ArrayList;
 
 
-
 public class MainFragment extends GalleryFragment {
+
     GridView gv;
     ArrayList<File> list;
+
     public MainFragment() {
     }
-
 
     public static MainFragment newInstance(String param1, String param2) {
         MainFragment fragment = new MainFragment();
@@ -76,7 +73,7 @@ public class MainFragment extends GalleryFragment {
         return v;
     }
 
-    class GridAdapterFragment extends BaseAdapter {
+    private class GridAdapterFragment extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -139,12 +136,5 @@ public class MainFragment extends GalleryFragment {
             return image;
         }
     }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-    }
-
 
 }

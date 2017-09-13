@@ -29,6 +29,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import static android.os.Environment.DIRECTORY_DCIM;
+import static layout.MainFragment.resize;
 
 
 public class GalleryFragment extends Fragment {
@@ -63,7 +64,7 @@ public class GalleryFragment extends Fragment {
         return v;
     }
 
-    protected class GridAdapter extends BaseAdapter {
+    private class GridAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
