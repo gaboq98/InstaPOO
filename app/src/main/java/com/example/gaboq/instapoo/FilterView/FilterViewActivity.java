@@ -39,9 +39,9 @@ public class FilterViewActivity extends AppCompatActivity {
 
 
     int[] images = {R.drawable.flores,
-            R.drawable.w_b, R.drawable.w_b, R.drawable.w_b, R.drawable.w_b,
+            R.drawable.w_b, R.drawable.w_b, R.drawable.d_min, R.drawable.w_b,
             R.drawable.sepia, R.drawable.negative,
-            R.drawable.gaussiano,R.drawable.w_b};
+            R.drawable.gaussiano,R.drawable.ascii, R.drawable.cr};
 
     MainFactory mFactory = new MainFactory();
 
@@ -51,6 +51,9 @@ public class FilterViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_filter_view);
 
         final String imageString = getIntent().getStringExtra("img");
+
+        final Bitmap originalBitmap;
+        originalBitmap = BitmapFactory.decodeFile(imageString);
 
         simpleGallery = (Gallery) findViewById(R.id.simpleGallery);
         selectedImageView = (ImageView) findViewById(R.id.selectedImageView);
@@ -62,9 +65,8 @@ public class FilterViewActivity extends AppCompatActivity {
         simpleGallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Bitmap bitmap;
-                bitmap = BitmapFactory.decodeFile(imageString);
-                bitmap = resize(bitmap, 1080, 1080);
+                Bitmap bitmap = originalBitmap;
+                bitmap = resize(bitmap, 720, 720);
                 IFilter f = mFactory.getInstance(bitmap, position, getApplicationContext());
                 bitmap = f.generateBitmap();
                 selectedImageView.setImageBitmap(bitmap);

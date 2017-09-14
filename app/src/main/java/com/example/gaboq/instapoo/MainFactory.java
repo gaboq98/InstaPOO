@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 
 import com.example.gaboq.instapoo.filters.Ascii;
 import com.example.gaboq.instapoo.filters.Averaging;
+import com.example.gaboq.instapoo.filters.CRFilter;
 import com.example.gaboq.instapoo.filters.DecompositionMax;
 import com.example.gaboq.instapoo.filters.DecompositionMin;
 import com.example.gaboq.instapoo.filters.Desaturation;
@@ -16,7 +17,7 @@ import com.example.gaboq.instapoo.filters.Negative;
 import com.example.gaboq.instapoo.filters.Sepia;
 
 /**
- * Created by josu on 20/8/2017.
+ * Created by gaboq on 20/8/2017.
  */
 
 public class MainFactory {
@@ -41,6 +42,8 @@ public class MainFactory {
                 return new GaussianBlur(bitmap,context);
             case 8:
                 return new Ascii(bitmap, context);
+            case 9:
+                return new CRFilter(bitmap);
             default:
                 return new Imagen(bitmap);
         }

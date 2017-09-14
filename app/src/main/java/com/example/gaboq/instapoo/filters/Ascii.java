@@ -57,7 +57,6 @@ public class Ascii extends Imagen {
         c.drawARGB(0, Color.WHITE,Color.WHITE,Color.WHITE);
         c.drawBitmap(b, 0, 0, null);
         TextPaint textPaint = new TextPaint();
-        //textPaint.density = -10;
         textPaint.setAntiAlias(true);
         textPaint.setTypeface(Typeface.MONOSPACE);
         textPaint.setTextSize(2);
