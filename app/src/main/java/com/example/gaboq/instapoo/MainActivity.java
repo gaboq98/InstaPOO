@@ -72,4 +72,8 @@ public class MainActivity extends AbsRuntimePermission {
 
     }
 
+    public void extra(View v) {
+        Toast.makeText(getApplicationContext(), "Puntos extra", Toast.LENGTH_LONG).show();
+    }
+
 }
