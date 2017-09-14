@@ -34,7 +34,7 @@ public class Ascii extends Imagen {
     private Context context;
 
     public Ascii(Bitmap bitmap, Context context){
-        super(resize(bitmap, 500, 500));
+        super(resize(bitmap, 720, 720));
         this.context = context;
         byteArray = new char[(int) length];
         applyFilter();
@@ -43,47 +43,29 @@ public class Ascii extends Imagen {
     @Override
     public void applyFilter(){
         for (int i = 0; i < length ; i++) {
-            byteArray[i] =toAscii(Color.blue(aux[i]));
+            byteArray[i] = toAscii(Color.blue(aux[i]));
         }
         asciistr = new String(byteArray);
     }
 
     @Override
     public Bitmap generateBitmap() {
-        Bitmap b = Bitmap.createBitmap(width*2, height*2+250, Bitmap.Config.ARGB_8888);
+        Bitmap b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
         Canvas c = new Canvas(b);
         c.drawARGB(0, Color.WHITE,Color.WHITE,Color.WHITE);
         c.drawBitmap(b, 0, 0, null);
         TextPaint textPaint = new TextPaint();
-        //textPaint.density = -10;
         textPaint.setAntiAlias(true);
         textPaint.setTypeface(Typeface.MONOSPACE);
-        textPaint.setTextSize(4);
-        //textPaint.setTextScaleX(4);
-        StaticLayout sl= new StaticLayout(asciistr, textPaint,width*4, Layout.Alignment.ALIGN_CENTER, 1.0f , 0.0f, false);
+        textPaint.setTextSize(2);
+        StaticLayout sl= new StaticLayout(asciistr, textPaint, width*2, Layout.Alignment.ALIGN_CENTER, 1.0f , 0.0f, false);
+        c.translate(0,0);
         sl.draw(c);
-        saveText();
+
         return b;
     }
 
-
-    private void saveText() {
-
-        String time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String filename = "ASCII" + time;
-        File file = new File("/data/user/0/com.example.gaboq.instapoo/files/Ascii/", filename + ".txt");
-
-        FileOutputStream outputStream;
-
-        try {
-            outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write(asciistr.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private char toAscii(double g)
     {
@@ -102,7 +84,7 @@ public class Ascii extends Imagen {
         } else if (g >= 100.0) {
             str = '&';
         } else if (g >= 70.0) {
-            str = 'K';
+            str = '#';
         } else if (g >= 50.0) {
             str = '#';
         } else {
