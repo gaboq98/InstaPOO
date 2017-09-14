@@ -14,7 +14,6 @@ public class Imagen implements IFilter{
 
     int width;
     int height;
-    Pixel[] pixels;
     int[] aux;
     long length;
 
@@ -25,23 +24,8 @@ public class Imagen implements IFilter{
         this.width = bitmap.getWidth();
         this.height = bitmap.getHeight();
         this.aux = new int[this.height*this.width];
-        this.pixels = new Pixel[this.height*this.width];
         bitmap.getPixels(aux, 0, this.width, 0, 0, this.width, this.height);
         this.length = this.height*this.width;
-        fillpixels();
-    }
-
-    protected void fillpixels(){
-        for(int i =0; i < this.length; i++ ){
-            pixels[i] = new Pixel(aux[i]);
-        }
-    }
-
-    public static int check(int value){
-            if (value>2000){
-                value = (int) (value/2.2);
-            }
-            return value;
     }
 
     @Override
@@ -58,37 +42,6 @@ public class Imagen implements IFilter{
         return Bitmap.createScaledBitmap(bitmap,canvas.getWidth(),canvas.getHeight(),false);
     }
 
-
-    protected class Pixel{
-        int a;
-        int r;
-        int g;
-        int b;
-
-        public void setRGB(int r, int g, int b){
-            this.r = r;
-            this.g = g;
-            this.b = b;
-        }
-
-        public int getR() {return r;}
-
-        public int getG() {return g;}
-
-        public int getB() {return b;}
-
-        @ColorInt
-        public int getValue(){
-            return Color.argb(a,r,g,b);
-        }
-
-        Pixel(int color){
-            this.a = Color.alpha(color);
-            this.r = Color.red(color);
-            this.g = Color.green(color);
-            this.b = Color.blue(color);
-        }
-    }
 
     protected int max(int n1, int n2, int n3){
         int temp = 0;
@@ -110,6 +63,15 @@ public class Imagen implements IFilter{
             }
         }
         return temp;
+    }
+
+    protected int checkValue(int value){
+        if (value<0){
+            value=0;
+        }else if(value>255){
+            value = 255;
+        }
+        return value;
     }
 
     public int getWidth() {

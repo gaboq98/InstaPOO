@@ -7,6 +7,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 
 import layout.CamFragment;
@@ -67,8 +69,11 @@ public class MainActivity extends AbsRuntimePermission {
 
     @Override
     public void onPermissionsGranted(int requestCode) {
-        //Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_LONG).show();
+
     }
 
+    public void extra(View v) {
+        Toast.makeText(getApplicationContext(), "Puntos extra", Toast.LENGTH_LONG).show();
+    }
 
 }

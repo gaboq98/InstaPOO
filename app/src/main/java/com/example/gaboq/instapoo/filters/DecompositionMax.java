@@ -1,6 +1,7 @@
 package com.example.gaboq.instapoo.filters;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 
 /**
  * Created by Admin on 20/8/2017.
@@ -18,12 +19,11 @@ public class DecompositionMax extends Imagen {
     public void applyFilter() {
         for (int i = 0; i <this.length; i++) {
             int r,g,b;
-            r = pixels[i].getR();
-            g = pixels[i].getG();
-            b = pixels[i].getB();
+            r = Color.red(aux[i]);
+            g = Color.green(aux[i]);
+            b = Color.blue(aux[i]);
             int maxValue = max(r,g,b);
-            pixels[i].setRGB(maxValue,maxValue,maxValue);
-            aux[i] = pixels[i].getValue();
+            aux[i] = Color.argb(255,maxValue,maxValue,maxValue);
         }
     }
 }
